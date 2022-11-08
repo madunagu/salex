@@ -140,7 +140,7 @@
                 @endif
 
                 <div class="cart-wish-wrap no-padding ml0">
-                    @include ('shop::products.add-to-cart', [
+                    @include ('velocity::products.add-to-cart', [
                         'product'           => $product,
                         'btnText'           => $btnText ?? null,
                         'moveToCart'        => $moveToCart ?? null,
