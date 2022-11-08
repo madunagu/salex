@@ -169,6 +169,28 @@ return [
      */
     'version' => env('APP_VERSION', '1.x-dev'),
 
+    /*
+     *SMS Keys
+     */
+
+    'sms' => [
+        'sms77' => [
+            'config' => [
+                'api_key' => env('SMS77_API_KEY', '**'),
+                'sender_id' => env('SMS77_SENDER_NAME', '**'),
+            ],
+        ],
+
+        'twilio' => [
+
+            'config' => [
+                'sid' => env('TWILIO_SID', '**'),
+                'token' => env('TWILIO_TOKEN', '**'),
+                'ms_id' => env('TWILIO_MESSAGING_SERVICE_ID', '**'),
+            ],
+        ],
+    ],
+
     /**
      * Blacklisting attributes while debugging
      */
@@ -283,7 +305,18 @@ return [
         Webkul\DebugBar\Providers\DebugBarServiceProvider::class,
         Webkul\Marketing\Providers\MarketingServiceProvider::class,
         Webkul\Notification\Providers\NotificationServiceProvider::class,
-        Webkul\Sitemap\Providers\SitemapServiceProvider::class
+        Webkul\Sitemap\Providers\SitemapServiceProvider::class,
+
+        /**
+         * Salex Package Service Providers.
+         */
+
+        Salex\MarketPlace\Providers\MarketPlaceServiceProvider::class,
+        Salex\Driver\Providers\DriverServiceProvider::class,
+        Salex\SMS\Providers\SMSServiceProvider::class,
+        Salex\Express\Providers\ExpressServiceProvider::class,
+        Salex\Elegant\Providers\ElegantServiceProvider::class,
+        // Salex\Binance\Providers\BinanceServiceProvider::class,
     ],
 
     /*

@@ -34,10 +34,13 @@
         "laravel/ui": "^3.0",
         "maatwebsite/excel": "^3.1.26",
         "paypal/paypal-checkout-sdk": "1.0.1",
+        "php-open-source-saver/jwt-auth": "^2.0",
         "prettus/l5-repository": "^2.6",
         "pusher/pusher-php-server": "^7.0",
         "spatie/laravel-ignition": "^1.0",
-        "spatie/laravel-sitemap": "^6.1"
+        "spatie/laravel-sitemap": "^6.1",
+        "toin0u/geocoder-laravel": "^4.5",
+        "twilio/sdk": "^6.43"
     },
     "require-dev": {
         "codeception/codeception": "*@dev",
@@ -104,7 +107,14 @@
             "Webkul\\DebugBar\\": "packages/Webkul/DebugBar/src",
             "Webkul\\Marketing\\": "packages/Webkul/Marketing/src",
             "Webkul\\Notification\\": "packages/Webkul/Notification/src",
-            "Webkul\\Sitemap\\": "packages/Webkul/Sitemap/src"
+            "Webkul\\Sitemap\\": "packages/Webkul/Sitemap/src",
+
+            "Salex\\Driver\\": "packages/Salex/Driver/src",
+            "Salex\\MarketPlace\\": "packages/Salex/MarketPlace/src",
+            "Salex\\SMS\\": "packages/Salex/SMS/src",
+            "Salex\\Express\\": "packages/Salex/Express/src",
+            "Salex\\Elegant\\": "packages/Salex/Elegant/src",
+            "Salex\\Binance\\": "packages/Salex/Binance/src"
         }
     },
     "autoload-dev": {
