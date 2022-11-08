@@ -1697,11 +1697,11 @@
      */
     .sticky-header {
         top: 0px;
-        height: 56px;
+        height: 90px;
         z-index: 100;
         position: sticky;
         background: white;
-        padding: 0 120px 0 120px;
+        padding: 0 8% 0 8%;
 
         &.header-shadow {
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
@@ -2333,7 +2333,8 @@
 .vc-header {
     z-index: 10;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 0 8%;
+    border-top: 1px solid #E5E5E5;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);
 }
 
@@ -2696,12 +2697,12 @@
 }
 
 .image-search-container {
-    top: 9px;
+    top: 11px;
     right: 45px;
     z-index: 10;
     cursor: pointer;
     position: absolute;
-    background: #fff;
+    // background: #fff;
     height: 24px !important;
 }
 

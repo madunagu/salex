@@ -140,7 +140,7 @@ label {
     @include box-shadow(0 0 0 0 rgba(0, 0, 0, 0.24));
 
     margin: 0;
-    padding: 0 120px 0 120px;
+    padding: 0 8% 0 8%;
     min-height: 32px;
     color: $font-color;
     background: #eeeeee;
@@ -418,15 +418,15 @@ label {
 
 header {
     .logo {
-        height: 46px;
+        height: 60px;
         padding-left: 10px;
     }
 
     #search-form {
-        height: 40px;
-        margin: 8px 0px;
-        background: $white-color;
-
+        background: #F2F3F8;
+        height: 45px;
+        margin: 22px 0;
+        border-radius: 5px;
         * {
             height: 100%;
         }
@@ -435,14 +435,15 @@ header {
             max-width: 550px;
 
             .selectdiv {
-                width: 210px;
+                width: 292px;
 
                 .select-icon {
                     top: -30px;
                     right: 8px;
                     z-index: 10;
                     font-size: 18px;
-                    background-color: $white-color;
+                    // background-color: $white-color;
+                    color: black;
                     height: 20px;
                 }
             }
@@ -451,11 +452,18 @@ header {
                 width: 100%;
                 height: 100%;
                 cursor: pointer;
-                border-radius: 2px 0px 0px 2px;
-                border: 1px solid $theme-color;
-                border-right: 0;
-                font-family: 'Source Sans Pro', sans-serif;
-
+                // border-radius: 5px 0px 0px 5px;
+                // border: 1px solid $theme-color;
+                // border-right: 0;
+                border :0;
+                // font-family: 'Source Sans Pro', sans-serif;
+                font-family: 'Poppins', sans-serif;
+                background:transparent;
+                color: black;
+                text-transform: uppercase;
+                padding: 13px 26px 13px 12px;
+                font-weight: lighter;
+                letter-spacing: 0.325px;
                 -webkit-appearance: none;
                 -moz-appearance: none;
                 appearance: none;
@@ -474,8 +482,12 @@ header {
             padding: 0 10px;
             line-height: 20px;
             letter-spacing: 0;
-            border: 1px solid $theme-color;
+            background: transparent;
+            // border: 1px solid $theme-color;
+            border: 0;
             border-left: 1px solid $border-common;
+            border-left: 1px solid #D0D1D6;
+            border-radius: 18px;
         }
 
         .btn {
@@ -497,10 +509,10 @@ header {
         #header-search-icon {
             min-width: 40px;
             border-radius: 0px 2px 2px 0px;
-            background-color: $theme-color;
+            background-color: transparent;
 
             i {
-                color: $button-text-color;
+                color: #232426;
             }
         }
     }
