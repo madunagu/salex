@@ -59,7 +59,7 @@ $(function() {
      * Velocity JS path. Just make sure if you are renaming
      * file then update this path also for mobile.
      */
-    let velocityJSPath = 'themes/velocity/assets/js/velocity.js';
+    let velocityJSPath = 'themes/succinct/assets/js/succinct.js';
 
     if (
         isMobile() &&
