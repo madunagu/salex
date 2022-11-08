@@ -1,0 +1,30 @@
+{
+    "name": "madunagu/succinct-theme",
+    "description": "Succinct Theme for Bagisto.",
+    "license": "MIT",
+
+    "authors": [
+        {
+            "name": "ekene-zirite",
+            "email": "ekenem@ziritetech.com"
+        }
+    ],
+
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Salex\\Succinct\\": "src/"
+        }
+    },
+
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Salex\\Succinct\\Providers\\SuccinctServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+
+    "minimum-stability": "dev"
+}

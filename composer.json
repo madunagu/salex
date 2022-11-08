@@ -114,6 +114,7 @@
             "Salex\\SMS\\": "packages/Salex/SMS/src",
             "Salex\\Express\\": "packages/Salex/Express/src",
             "Salex\\Elegant\\": "packages/Salex/Elegant/src",
+            "Salex\\Succinct\\": "packages/Salex/Succinct/src",
             "Salex\\Binance\\": "packages/Salex/Binance/src"
         }
     },

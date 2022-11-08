@@ -316,6 +316,7 @@ return [
         Salex\SMS\Providers\SMSServiceProvider::class,
         Salex\Express\Providers\ExpressServiceProvider::class,
         Salex\Elegant\Providers\ElegantServiceProvider::class,
+        Salex\Succinct\Providers\SuccinctServiceProvider::class,
         // Salex\Binance\Providers\BinanceServiceProvider::class,
     ],
 

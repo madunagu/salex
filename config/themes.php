@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'default' => 'default',
+    'default' => 'succinct',
 
     'themes' => [
         'default' => [
@@ -16,6 +16,20 @@ return [
         //     'name' => 'Bliss',
         //     'parent' => 'default'
         // ]
+
+        'succinct' => [
+            'views_path' => 'resources/themes/succinct/views',
+            'assets_path' => 'public/themes/succinct/assets',
+            'name' => 'Succinct',
+            'parent' => 'velocity'
+        ],
+
+        'elegant' => [
+            'views_path' => 'resources/themes/elegant/views',
+            'assets_path' => 'public/themes/elegant/assets',
+            'name' => 'Elegant',
+            'parent' => 'default'
+        ],
 
         'velocity' => [
             'views_path' => 'resources/themes/velocity/views',
