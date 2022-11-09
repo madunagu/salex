@@ -65,7 +65,7 @@
 
         > .row {
             padding: 60px 130px;
-            background: #30383F;
+            background: #fff;
 
             .logo {
                 width: auto;
@@ -86,7 +86,10 @@
                             margin-bottom: 5px;
 
                             a {
-                                color: rgba(255,255,255,0.83);
+                                // color: rgba(255,255,255,0.83);
+                                color: #000;
+                                font-size: 15px;
+                                font-weight: 300;
                             }
                         }
                     }
@@ -139,8 +142,10 @@
                 }
 
                 h3 {
-                    font-size: 14px;
-                    color: rgba(255,255,255,0.52);
+                    font-size: 18px;
+                    // color: rgba(255,255,255,0.52);
+                    text-transform: uppercase;
+                    color: #000;
                 }
             }
         }
@@ -153,6 +158,8 @@
                     @extend .clr-dark;
 
                     font-size: 14px;
+                    color: #000;
+                    font-weight: 300;
                 }
             }
         }
