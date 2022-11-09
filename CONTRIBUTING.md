@@ -1,30 +1,9 @@
-# Bagisto Contribution Guide
+# Salex Contribution Guide
 
 **BUGS:**
 
-To encourage active collaboration, Bagisto encourages pull requests, not just bug reports. "Bug reports" may also be sent in the form of a pull request containing a negative test.
+Thank you for your interest to work on this project with us. Please refer to http://devdocs.bagisto.com for documentation on how to use library features properly. Modular, well encapsulated code will be much appreciated while contributing to the project.
 
-However, when filing a bug report, your issue should contain a title and a clear description of the issue. You should also include as much relevant information as possible and a code sample that demonstrates the issue. The goal of a bug report is to make it easy for yourself - and others - to replicate the bug and develop a fix.
-
-Remember, bug reports are created in the hope that others with the same problem will collaborate with you on solving it. Creating a bug report serves to help yourself and others start on the path of fixing the problem.
-
-**Projects that you can contribute in:**
-
-1. Bagisto
-
-2. Bagisto docs
-
-3. Laravel-aliexpress-dropship
-
-4. Laravel-aliexpress-dropship-chrome-extension
-
-5. Bagisto-custom-style-extension
-
-**Core development ideas or discussion:**
-
-If you propose a new feature, please implement at least some of the code needed to complete the quality.
-
-Informal discussion regarding bugs, new features, and implementation of existing features occurs in the comments of the issues filed using feature template.
 
 **Which branch you should target?**
 
@@ -37,6 +16,31 @@ Major new features should always be sent to the master branch, which contains th
 **Compiling assets:**
 
 If you are submitting a change that will affect a compiled file, such as most of the files in admin/resources/assets/sass or admin/resources/assets/js of the Bagisto repository, do not commit the compiled files. Due to their large size, they cannot realistically be reviewed by a maintainer. This could be exploited as a way to inject malicious code into Bagisto. To defensively prevent this, all compiled files will be generated and committed by Bagisto maintainers.
+
+**Theme Editing(Succinct):**
+
+When working on theme files, it is recommended to edit the sass files directly instead of the compiled css files. the sass files can be found in the packages/Salex/Succinct/src/Resources/assets/sass there are different scss files for different pages.
+
+After editing the sass files, you will have to compile by running in the same folder (packages/Salex/Succinct/src)
+you may need to run cd packages/Salex/Succinct/src to change terminal to that directory
+
+  ``` script
+
+    npm run prod
+
+  ```
+and then to publish the files to the UI
+
+  ``` terminal
+
+    php artisan vendor:publish --all --force
+
+  ```
+
+I recommend the proper css styles and targets should be experimented within chrome and then the .scss files should worked on to avoid running these scripts to much as it may take some seconds to complete.
+
+All changes for the theme cohesion should be made within the scss and resource files of the theme, making changes in other folder will affect other files and may have unexpected consequences.
+
 
 **Code style:**
 
