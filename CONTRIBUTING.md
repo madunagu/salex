@@ -64,3 +64,21 @@ Below is an example of a valid Bagisto doc block. Note that the @param attribute
         //
     }
   ```
+
+**Code style:**
+
+## Tasks to be completed
+
+Tracking order page on shop
+Batching of Shipments algorighm for admin to create a batch of shipments and assign to driver
+Theming
+Payment Platform integration
+Geolocation codes
+Order flagging
+Cabinet integration
+Security
+Map
+Shipment Dates implementation
+Homepage Changes
+Status controls
+Product creation
