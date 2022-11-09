@@ -1,6 +1,6 @@
 <?php
 
-namespace Salex\Binance\Providers;
+namespace Salex\Bitpay\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
@@ -15,10 +15,10 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Event::listen('bagisto.shop.layout.body.after', static function (ViewRenderEventManager $viewRenderEventManager) {
-            $viewRenderEventManager->addTemplate('binance::checkout.onepage.qr-scan');
-        });
+        // Event::listen('bagisto.shop.layout.body.after', static function (ViewRenderEventManager $viewRenderEventManager) {
+        //     $viewRenderEventManager->addTemplate('binance::checkout.onepage.qr-scan');
+        // });
 
-        Event::listen('sales.invoice.save.after', 'Salex\Binance\Listeners\Transaction@saveTransaction');
+        Event::listen('sales.invoice.save.after', 'Salex\Bitpay\Listeners\Transaction@saveTransaction');
     }
 }

@@ -191,6 +191,10 @@ return [
         ],
     ],
 
+    'bitpay' => [
+        'token' => env('BITPAY_TOKEN', ''),
+    ],
+
     /**
      * Blacklisting attributes while debugging
      */
@@ -317,6 +321,7 @@ return [
         Salex\Express\Providers\ExpressServiceProvider::class,
         Salex\Elegant\Providers\ElegantServiceProvider::class,
         Salex\Succinct\Providers\SuccinctServiceProvider::class,
+        Salex\Bitpay\Providers\BitpayServiceProvider::class,
         // Salex\Binance\Providers\BinanceServiceProvider::class,
     ],
 

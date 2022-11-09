@@ -13,7 +13,20 @@ return [
                 'validation'    => 'required',
                 'channel_based' => false,
                 'locale_based'  => true,
-            ], [
+            ],[
+                'name'          => 'token',
+                'title'         => 'bitpay::app.token',
+                'type'          => 'text',
+                'channel_based' => false,
+                'default_value' => config('app.bitpay.token'),
+                'locale_based'  => false,
+            ],[
+                'name'          => 'merchant_email',
+                'title'         => 'bitpay::app.merchant_email',
+                'type'          => 'text',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ],  [
                 'name'          => 'description',
                 'title'         => 'admin::app.admin.system.description',
                 'type'          => 'textarea',

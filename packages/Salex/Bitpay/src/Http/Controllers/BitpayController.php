@@ -4,6 +4,7 @@ namespace Salex\Bitpay\Http\Controllers;
 
 use Webkul\Checkout\Facades\Cart;
 use Salex\Bitpay\Payment\Bitpay;
+use Salex\Bitpay\Helpers\Ipn;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 
@@ -12,275 +13,62 @@ class BitpayController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Paypal\Payment\SmartButton  $smartButton
      * @param  \Webkul\Attribute\Repositories\OrderRepository  $orderRepository
-     * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
+     * @param  \Webkul\Paypal\Helpers\Ipn  $ipnHelper
      * @return void
      */
     public function __construct(
-        protected Bitpay $bitpay,
         protected OrderRepository $orderRepository,
-        protected InvoiceRepository $invoiceRepository
+        protected Ipn $ipnHelper
     )
     {
     }
 
     /**
-     * Paypal order creation for approval of client.
+     * Redirects to the paypal.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\View\View
      */
-    public function createOrder()
+    public function redirect()
     {
-        try {
-            return response()->json($this->bitpay->createOrder($this->buildRequestBody()));
-        } catch (\Exception $e) {
-            return response()->json(json_decode($e->getMessage()), 400);
-        }
+        return view('bitpay::standard-redirect');
     }
 
     /**
-     * Capturing paypal order after approval.
+     * Cancel payment from paypal.
      *
      * @return \Illuminate\Http\Response
      */
-    public function captureOrder()
+    public function cancel()
     {
-        try {
-            $this->bitpay->captureOrder(request()->input('orderData.orderID'));
-            return $this->saveOrder();
-        } catch (\Exception $e) {
-            return response()->json(json_decode($e->getMessage()), 400);
-        }
+        session()->flash('error', trans('shop::app.checkout.cart.paypal-payment-canceled'));
+
+        return redirect()->route('shop.checkout.cart.index');
     }
 
     /**
-     * Build request body.
-     *
-     * @return array
-     */
-    protected function buildRequestBody()
-    {
-        $cart = Cart::getCart();
-
-        $billingAddressLines = $this->getAddressLines($cart->billing_address->address1);
-
-        $data = [
-            'intent' => 'CAPTURE',
-
-            'payer'  => [
-                'name' => [
-                    'given_name' => $cart->billing_address->first_name,
-                    'surname'    => $cart->billing_address->last_name,
-                ],
-
-                'address' => [
-                    'address_line_1' => current($billingAddressLines),
-                    'address_line_2' => last($billingAddressLines),
-                    'admin_area_2'   => $cart->billing_address->city,
-                    'admin_area_1'   => $cart->billing_address->state,
-                    'postal_code'    => $cart->billing_address->postcode,
-                    'country_code'   => $cart->billing_address->country,
-                ],
-
-                'email_address' => $cart->billing_address->email,
-
-                'phone' => [
-                    'phone_type'   => 'MOBILE',
-
-                    'phone_number' => [
-                        'national_number' => $this->smartButton->formatPhone($cart->billing_address->phone),
-                    ],
-                ],
-            ],
-
-            'application_context' => [
-                'shipping_preference' => 'SET_PROVIDED_ADDRESS',
-            ],
-
-            'purchase_units' => [
-                [
-                    'amount'   => [
-                        'value'         => $this->smartButton->formatCurrencyValue((float) $cart->sub_total + $cart->tax_total + ($cart->selected_shipping_rate ? $cart->selected_shipping_rate->price : 0) - $cart->discount_amount),
-                        'currency_code' => $cart->cart_currency_code,
-
-                        'breakdown'     => [
-                            'item_total' => [
-                                'currency_code' => $cart->cart_currency_code,
-                                'value'         => $this->smartButton->formatCurrencyValue((float) $cart->sub_total),
-                            ],
-
-                            'shipping'   => [
-                                'currency_code' => $cart->cart_currency_code,
-                                'value'         => $this->smartButton->formatCurrencyValue((float) ($cart->selected_shipping_rate ? $cart->selected_shipping_rate->price : 0)),
-                            ],
-
-                            'tax_total'  => [
-                                'currency_code' => $cart->cart_currency_code,
-                                'value'         => $this->smartButton->formatCurrencyValue((float) $cart->tax_total),
-                            ],
-
-                            'discount'   => [
-                                'currency_code' => $cart->cart_currency_code,
-                                'value'         => $this->smartButton->formatCurrencyValue((float) $cart->discount_amount),
-                            ],
-                        ],
-                    ],
-
-                    'items'    => $this->getLineItems($cart),
-                ],
-            ]
-        ];
-
-        if ($cart->haveStockableItems() && $cart->shipping_address) {
-            $data['purchase_units'][0] = array_merge($data['purchase_units'][0], [
-                'shipping' => [
-                    'address' => [
-                        'address_line_1' => current($billingAddressLines),
-                        'address_line_2' => last($billingAddressLines),
-                        'admin_area_2'   => $cart->shipping_address->city,
-                        'admin_area_1'   => $cart->shipping_address->state,
-                        'postal_code'    => $cart->shipping_address->postcode,
-                        'country_code'   => $cart->shipping_address->country,
-                    ],
-                ],
-            ]);
-        }
-
-        return $data;
-    }
-
-    /**
-     * Return cart items.
-     *
-     * @param  string  $cart
-     * @return array
-     */
-    protected function getLineItems($cart)
-    {
-        $lineItems = [];
-
-        foreach ($cart->items as $item) {
-            $lineItems[] = [
-                'unit_amount' => [
-                    'currency_code' => $cart->cart_currency_code,
-                    'value'         => $this->smartButton->formatCurrencyValue((float) $item->price),
-                ],
-                'quantity'    => $item->quantity,
-                'name'        => $item->name,
-                'sku'         => $item->sku,
-                'category'    => $item->product->getTypeInstance()->isStockable() ? 'PHYSICAL_GOODS' : 'DIGITAL_GOODS',
-            ];
-        }
-
-        return $lineItems;
-    }
-
-    /**
-     * Return convert multiple address lines into 2 address lines.
-     *
-     * @param  string  $address
-     * @return array
-     */
-    protected function getAddressLines($address)
-    {
-        $address = explode(PHP_EOL, $address, 2);
-
-        $addressLines = [current($address)];
-
-        if (isset($address[1])) {
-            $addressLines[] = str_replace(["\r\n", "\r", "\n"], ' ', last($address));
-        } else {
-            $addressLines[] = '';
-        }
-
-        return $addressLines;
-    }
-
-    /**
-     * Saving order once captured and all formalities done.
+     * Success payment.
      *
      * @return \Illuminate\Http\Response
      */
-    protected function saveOrder()
+    public function success()
     {
-        if (Cart::hasError()) {
-            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
-        }
+        $order = $this->orderRepository->create(Cart::prepareDataForOrder());
 
-        try {
-            Cart::collectTotals();
+        Cart::deActivateCart();
 
-            $this->validateOrder();
+        session()->flash('order', $order);
 
-            $order = $this->orderRepository->create(Cart::prepareDataForOrder());
-
-            $this->orderRepository->update(['status' => 'processing'], $order->id);
-
-            if ($order->canInvoice()) {
-                $this->invoiceRepository->create($this->prepareInvoiceData($order));
-            }
-
-            Cart::deActivateCart();
-
-            session()->flash('order', $order);
-
-            return response()->json([
-                'success' => true,
-            ]);
-        } catch (\Exception $e) {
-            session()->flash('error', trans('shop::app.common.error'));
-
-            throw $e;
-        }
+        return redirect()->route('shop.checkout.success');
     }
 
     /**
-     * Prepares order's invoice data for creation.
+     * Paypal IPN listener.
      *
-     * @param  \Webkul\Sales\Models\Order  $order
-     * @return array
+     * @return \Illuminate\Http\Response
      */
-    protected function prepareInvoiceData($order)
+    public function ipn()
     {
-        $invoiceData = ["order_id" => $order->id,];
-
-        foreach ($order->items as $item) {
-            $invoiceData['invoice']['items'][$item->id] = $item->qty_to_invoice;
-        }
-
-        return $invoiceData;
-    }
-
-    /**
-     * Validate order before creation.
-     *
-     * @return void|\Exception
-     */
-    protected function validateOrder()
-    {
-        $cart = Cart::getCart();
-
-        $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
-
-        if (! $cart->checkMinimumOrder()) {
-            throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]));
-        }
-
-        if ($cart->haveStockableItems() && ! $cart->shipping_address) {
-            throw new \Exception(trans('Please check shipping address.'));
-        }
-
-        if (! $cart->billing_address) {
-            throw new \Exception(trans('Please check billing address.'));
-        }
-
-        if ($cart->haveStockableItems() && ! $cart->selected_shipping_rate) {
-            throw new \Exception(trans('Please specify shipping method.'));
-        }
-
-        if (! $cart->payment) {
-            throw new \Exception(trans('Please specify payment method.'));
-        }
+        $this->ipnHelper->processIpn(request()->all());
     }
 }
