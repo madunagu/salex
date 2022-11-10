@@ -122,6 +122,9 @@ class SaleController extends Controller
         ]);
 
         $data = request()->all();
+
+        $this->merchant = auth()->guard('merchant')->user();
+
         $data['vendor_id'] = $this->merchant->store_id;
 
         $product = $this->productRepository->create($data);
@@ -137,7 +140,9 @@ class SaleController extends Controller
      * @return \Illuminate\View\View
      */
     public function update_product($id)
-    {
+    {       
+        $this->merchant = auth()->guard('merchant')->user();
+
         $product = $this->productRepository->with(['variants', 'variants.inventories'])->findOrFail($id);
 
         $categories = $this->categoryRepository->getCategoryTree();

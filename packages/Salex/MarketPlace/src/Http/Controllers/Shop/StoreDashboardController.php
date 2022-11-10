@@ -10,6 +10,7 @@ use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\OrderRepository;
+use Illuminate\Support\Facades\Auth;
 
 class StoreDashboardController extends Controller
 {
@@ -68,8 +69,6 @@ class StoreDashboardController extends Controller
         protected CustomerRepository $customerRepository,
         protected ProductInventoryRepository $productInventoryRepository
     ) {
-        $this->merchant = auth()->guard('merchant')->user();
-
         $this->_config = request('_config');
     }
 
@@ -81,6 +80,9 @@ class StoreDashboardController extends Controller
     public function index()
     {
         $this->setStartEndDate();
+
+        $this->merchant = auth()->guard('merchant')->user();
+
 
         $statistics = [
             /**

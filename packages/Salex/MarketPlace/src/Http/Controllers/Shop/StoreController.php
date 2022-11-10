@@ -9,6 +9,8 @@ use Salex\MarketPlace\Repositories\StoreRepository;
 use Salex\MarketPlace\Models\Store;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Salex\MarketPlace\Repositories\MerchantRepository;
+use Illuminate\Support\Facades\Auth;
+use Salex\MarketPlace\Models\Merchant;
 
 class StoreController extends Controller
 {
@@ -22,8 +24,6 @@ class StoreController extends Controller
      */
     protected $_config;
 
-    protected $merchant;
-
     /**
      * Create a new controller instance.
      *
@@ -33,8 +33,8 @@ class StoreController extends Controller
         protected StoreRepository $storeRepository,
         protected MerchantRepository $merchantRepository
     ) {
-        $this->merchant = auth()->guard('merchant')->user();
         $this->_config = request('_config');
+  
     }
 
     /**
@@ -44,7 +44,7 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $store_id = $this->merchant->store_id;
+        $store_id =Auth::guard('merchant')->user()->store_id;
         $store = $this->storeRepository->find($store_id);
         return view($this->_config['view'])->with('store', $store);
     }
@@ -58,13 +58,14 @@ class StoreController extends Controller
     public function create()
     {
         // $categories = $this->category->all();
-        $store_id = $this->merchant->store_id;
+        $merchant = Auth::guard('merchant')->user();
+        $store_id =$merchant->store_id;
+     
         $store = $this->storeRepository->find($store_id);
         if (!empty($store)) {
             return redirect()->route('merchant.store.update');
         }
 
-        $merchant = $this->merchant;
         $categories = [];
         return view($this->_config['view'], compact(['merchant', 'categories']));
     }
@@ -77,11 +78,11 @@ class StoreController extends Controller
     public function update()
     {
         // $categories = $this->category->all();
-
-        $store_id = $this->merchant->store_id;
+        $merchant = Auth::guard('merchant')->user();
+        $store_id =$merchant->store_id;
+     
         $store = $this->storeRepository->find($store_id);
 
-        $merchant = $this->merchant;
         $categories = [];
         return view($this->_config['view'], compact(['store', 'categories']));
     }
@@ -122,9 +123,12 @@ class StoreController extends Controller
         }
         if (!key_exists('is_visible', $data)) {
             $data['is_visible'] = 0;
-        }
-        $data['owner_id'] = $this->merchant->id;
-        $store_id = $this->merchant->store_id;
+        }   
+
+        $merchant =   Auth::guard('merchant')->user();
+     
+        $data['owner_id'] = $merchant->id;
+        $store_id = $merchant->store_id;
         $store = $this->storeRepository->find($store_id);
 
         if (!empty($store)) {
@@ -134,9 +138,8 @@ class StoreController extends Controller
 
         $store = $this->storeRepository->create($data);
 
-
-        $this->merchant->store_id = $store->id;
-        $this->merchant->save();
+        $merchant->store_id = $store->id;
+        $merchant->save();
 
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Store']));
@@ -178,7 +181,8 @@ class StoreController extends Controller
         if (!key_exists('is_visible', $data)) {
             $data['is_visible'] = 0;
         }
-        $store_id = $this->merchant->store_id;
+        $store_id =   Auth::guard('merchant')->user()->store_id;
+
         $store = $this->storeRepository->find($store_id);
 
         if (empty($store)) {
