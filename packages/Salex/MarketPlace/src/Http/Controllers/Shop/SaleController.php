@@ -16,6 +16,7 @@ use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\Helpers\ProductType;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Exception;
+use Webkul\Sales\Repositories\OrderRepository;
 
 class SaleController extends Controller
 {
@@ -40,6 +41,7 @@ class SaleController extends Controller
         protected CategoryRepository $categoryRepository,
         protected AttributeFamilyRepository $attributeFamilyRepository,
         protected InventorySourceRepository $inventorySourceRepository,
+        protected OrderRepository $orderRepository,
     ) {
         $this->_config = request('_config');
         $this->merchant = auth()->guard('merchant')->user();
@@ -334,4 +336,18 @@ class SaleController extends Controller
         }
         return view($this->_config['view']);
     }
+
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function viewOrder($id)
+    {
+        $order = $this->orderRepository->findOrFail($id);
+
+        return view($this->_config['view'], compact('order'));
+    }
+
 }

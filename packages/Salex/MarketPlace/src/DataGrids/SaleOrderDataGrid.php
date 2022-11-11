@@ -121,7 +121,7 @@ class SaleOrderDataGrid extends DataGrid
             'title'  => trans('ui::app.datagrid.view'),
             'type'   => 'View',
             'method' => 'GET',
-            'route'  => 'merchant.orders.view',
+            'route'  => 'merchant.sale_orders.view',
             'icon'   => 'icon eye-icon',
         ], true);
     }
