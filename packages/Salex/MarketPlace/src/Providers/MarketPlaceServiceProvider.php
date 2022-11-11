@@ -64,7 +64,7 @@ class MarketPlaceServiceProvider extends ServiceProvider
      */
     protected function composeView()
     {
-        view()->composer(['elegant::merchants.account.products.create'], function ($view) {
+        view()->composer(['elegant::merchants.account.products.create','succinct::merchants.account.products.create'], function ($view) {
             $items = array();
 
             foreach (config('product_types') as $item) {
@@ -78,7 +78,7 @@ class MarketPlaceServiceProvider extends ServiceProvider
             $view->with('productTypes', $types);
         });
 
-        view()->composer('elegant::merchants.account.partials.sidemenu', function ($view) {
+        view()->composer(['elegant::merchants.account.partials.sidemenu','succinct::merchants.account.partials.sidemenu'], function ($view) {
             $tree = Tree::create();
 
             foreach (config('menu.merchant') as $item) {

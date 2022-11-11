@@ -211,7 +211,7 @@
 
             var query = '?channel=' + $('#channel-switcher').val() + '&locale=' + $('#locale-switcher').val();
 
-            window.location.href = "{{ route('admin.catalog.products.edit', $product->id)  }}" + query;
+            window.location.href = "{{ route('merchant.products.update', $product->id)  }}" + query;
         });
 
         tinyMCEHelper.initTinyMCE({

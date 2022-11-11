@@ -1,7 +1,3 @@
-@php
-$currentCustomer = auth()->guard('merchant')->user();
-@endphp
-
 @extends('elegant::merchants.account.index')
 
 @section('page_title')

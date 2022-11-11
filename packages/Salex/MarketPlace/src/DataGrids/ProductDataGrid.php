@@ -93,8 +93,8 @@ class ProductDataGrid extends DataGrid
         }
 
         /* query builder */
-        $queryBuilder = DB::table('product_flat')
-            ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
+        $queryBuilder = DB::table('products')
+            ->leftJoin('product_flat', 'product_flat.product_id', '=', 'products.id')
             ->leftJoin('attribute_families', 'products.attribute_family_id', '=', 'attribute_families.id')
             ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
             ->select(
@@ -172,7 +172,7 @@ class ProductDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($row) {
-                if (! empty($row->url_key)) {
+                if (!empty($row->url_key)) {
                     return "<a href='" . route('shop.productOrCategory.index', $row->url_key) . "' target='_blank'>" . $row->product_name . "</a>";
                 }
 
@@ -259,7 +259,7 @@ class ProductDataGrid extends DataGrid
             'condition' => function () {
                 return true;
             },
-        ],true);
+        ], true);
 
         $this->addAction([
             'title'        => trans('admin::app.datagrid.delete'),
@@ -267,14 +267,14 @@ class ProductDataGrid extends DataGrid
             'route'        => 'merchant.products.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
             'icon'         => 'icon trash-icon',
-        ],true);
+        ], true);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.copy'),
             'method' => 'GET',
             'route'  => 'merchant.products.copy',
             'icon'   => 'icon copy-icon',
-        ],true);
+        ], true);
     }
 
     /**
@@ -289,7 +289,7 @@ class ProductDataGrid extends DataGrid
             'label'  => trans('admin::app.datagrid.delete'),
             'action' => route('merchant.products.massdelete'),
             'method' => 'POST',
-        ],true);
+        ], true);
 
         $this->addMassAction([
             'type'    => 'update',
@@ -300,7 +300,7 @@ class ProductDataGrid extends DataGrid
                 trans('admin::app.datagrid.active')    => 1,
                 trans('admin::app.datagrid.inactive')  => 0,
             ],
-        ],true);
+        ], true);
     }
 
     /**

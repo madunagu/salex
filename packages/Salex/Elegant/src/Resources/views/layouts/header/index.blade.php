@@ -148,12 +148,12 @@
 
                                 <ul>
                                     <li>
-                                        <a href="{{ route('customer.profile.index') }}">{{ __('shop::app.header.profile') }}</a>
+                                        <a href="{{ route('shop.customer.profile.index') }}">{{ __('shop::app.header.profile') }}</a>
                                     </li>
 
                                     @if ($showWishlist)
                                         <li>
-                                            <a href="{{ route('customer.wishlist.index') }}">{{ __('shop::app.header.wishlist') }}</a>
+                                            <a href="{{ route('shop.customer.wishlist.index') }}">{{ __('shop::app.header.wishlist') }}</a>
                                         </li>
                                     @endif
 
@@ -174,14 +174,14 @@
                                     @endif
 
                                     <li>
-                                        <form id="customerLogout" action="{{ route('customer.session.destroy') }}" method="POST">
+                                        <form id="customerLogout" action="{{ route('shop.customer.session.destroy') }}" method="POST">
                                             @csrf
 
                                             @method('DELETE')
                                         </form>
 
                                         <a
-                                            href="{{ route('customer.session.destroy') }}"
+                                            href="{{ route('shop.customer.session.destroy') }}"
                                             onclick="event.preventDefault(); document.getElementById('customerLogout').submit();">
                                             {{ __('shop::app.header.logout') }}
                                         </a>

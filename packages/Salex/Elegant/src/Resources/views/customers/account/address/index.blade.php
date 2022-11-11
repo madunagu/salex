@@ -8,7 +8,7 @@
     <div class="account-layout">
         <div class="account-head">
             <span class="back-icon">
-                <a href="{{ route('customer.profile.index') }}">
+                <a href="{{ route('shop.customer.profile.index') }}">
                     <i class="icon icon-menu-back"></i>
                 </a>
             </span>

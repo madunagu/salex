@@ -1,20 +1,11 @@
 <div class="customer-sidebar row no-margin no-padding">
     <div class="account-details col-12">
-        @if (auth('customer')->user()->image)
-            <div>
-                <img style="width:80px;height:80px;border-radius:50%;" src="{{ auth('customer')->user()->image_url }}" alt="{{ auth('customer')->user()->first_name }}"/>
-            </div>
-        @else
-            <div class="customer-name col-12 text-uppercase">
-                {{ substr(auth('customer')->user()->first_name, 0, 1) }}
-            </div>
-        @endif
-        <div class="col-12 customer-name-text text-capitalize text-break">{{ auth('customer')->user()->first_name . ' ' . auth('customer')->user()->last_name}}</div>
-        <div class="customer-email col-12 text-break">{{ auth('customer')->user()->email }}</div>
+        <div class="col-12 customer-name-text text-capitalize text-break no-padding">{{ __('succinct::app.customer.sidebar.hello') }} {{ auth('customer')->user()->first_name }}</div>
     </div>
 
     @foreach ($menu->items as $menuItem)
         <ul type="none" class="navigation">
+            <li class="menu-title text-uppercase "> {{ __('succinct::app.customer.sidebar.title') }}</li>
             {{-- rearrange menu items --}}
             @php
                 $subMenuCollection = [];
@@ -55,7 +46,7 @@
 
             @foreach ($subMenuCollection as $index => $subMenuItem)
                 <li class="{{ $menu->getActive($subMenuItem) }}" title="{{ trans($subMenuItem['name']) }}">
-                    <a class="unset fw6 full-width" href="{{ $subMenuItem['url'] }}">
+                    <a class="unset full-width" href="{{ $subMenuItem['url'] }}">
                         <i class="icon {{ $index }} text-down-3"></i>
                         <span>{{ trans($subMenuItem['name']) }}<span>
                         <i class="rango-arrow-right float-right text-down-3"></i>

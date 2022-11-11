@@ -166,6 +166,12 @@ Route::group([
         'view' => 'elegant::merchants.account.sale_orders.index',
     ])->name('merchant.sale_orders.index');
 
+    Route::get('store/sale-orders/{id}', [SaleController::class, 'viewOrder'])->defaults('_config', [
+        'view' => 'elegant::merchants.account.sale_orders.view',
+    ])->name('merchant.sale_orders.view');
+
+
+
 
         /**
      * Inventory sources routes.

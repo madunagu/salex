@@ -28,52 +28,53 @@
     {!! view_render_event('bagisto.shop.customers.account.profile.view.before', ['customer' => $customer]) !!}
 
     <div class="account-table-content profile-page-content">
-        <div class="table">
-            <table>
-                <tbody>
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.before', ['customer' => $customer]) !!}
+        <div class="row">
+            <div class="col-lg-2">
+            @if (auth('customer')->user()->image)
+            <div>
+                <img style="width:100%;border-radius:50%;" src="{{ auth('customer')->user()->image_url }}" alt="{{ auth('customer')->user()->first_name }}"/>
+            </div>
+        @else
+            <div class="customer-name col-12 text-uppercase">
+                {{ substr(auth('customer')->user()->first_name, 0, 1) }}
+            </div>
+        @endif
+            </div>
+            <div class="col-lg-8">
+           
+                    <p class="fs18">{{ __('succinct::app.customer.account.title') }}</p>
+      
+                    
+                    <label class="profile-label fs12 fw6 text-uppercase">{{ __('shop::app.customer.account.profile.fname') }}</label>
+                    <p class="detail">{{ $customer->first_name }}</p>
+                    <br/>
 
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.fname') }}</td>
+                    <label class="profile-label fs12 fw6 text-uppercase">{{ __('shop::app.customer.account.profile.lname') }}</label>
+                    <p class="detail">{{ $customer->last_name }}</p>
+                    <br/>
 
-                        <td>{{ $customer->first_name }}</td>
-                    </tr>
+                    <label class="profile-label fs12 fw6 text-uppercase">{{ __('shop::app.customer.account.profile.phone') }}</label>
+                    <p class="detail">{{ $customer->phone ?? '-' }}</p>
+                    <br/>
 
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.first_name.after', ['customer' => $customer]) !!}
+                    <label class="profile-label fs12 fw6 text-uppercase">{{ __('shop::app.customer.account.profile.gender') }}</label>
+                    <p class="detail">{{ $customer->gender ?? '-' }}</p>
+                    <br/>
+                
+                    <label class="profile-label fs12 fw6 text-uppercase">{{ __('shop::app.customer.account.profile.dob') }}</label>
+                    <p class="detail">{{ $customer->date_of_birth ?? '-' }}</p>
+                    <br/>
 
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.lname') }}</td>
+                    <label class="profile-label fs12 fw6 text-uppercase">{{ __('shop::app.customer.account.profile.email') }}</label>
+                    <p class="detail">{{ $customer->email ?? '-' }}</p>
+                    <br/>
 
-                        <td>{{ $customer->last_name }}</td>
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.last_name.after', ['customer' => $customer]) !!}
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.gender') }}</td>
-
-                        <td>{{ $customer->gender ?? '-' }}</td>
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.gender.after', ['customer' => $customer]) !!}
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.dob') }}</td>
-
-                        <td>{{ $customer->date_of_birth ?? '-' }}</td>
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.date_of_birth.after', ['customer' => $customer]) !!}
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.email') }}</td>
-
-                        <td>{{ $customer->email }}</td>
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.after', ['customer' => $customer]) !!}
-                </tbody>
-            </table>
+                    <p class="fs18">{{ __('succinct::app.customer.account.security') }}</p>
+      
+                    <label class="profile-label fs12 fw6 text-uppercase">{{ __('shop::app.customer.account.profile.password') }}</label>
+                    <p class="detail">*************</p>
+                    <br/>
+            </div>
         </div>
 
         <button

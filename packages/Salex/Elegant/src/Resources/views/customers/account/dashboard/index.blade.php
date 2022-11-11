@@ -7,7 +7,7 @@
 @section('account-content')
 <div class="account-layout dashboard">
     <div class="account-head mb-10">
-        <span class="back-icon"><a href="{{ route('customer.profile.index') }}"><i class="icon icon-menu-back"></i></a></span>
+        <span class="back-icon"><a href="{{ route('shop.customer.profile.index') }}"><i class="icon icon-menu-back"></i></a></span>
 
         <span class="account-heading">
             {{ __('admin::app.dashboard.title') }}
