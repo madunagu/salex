@@ -32,7 +32,9 @@ trait Sender
 
     private function isPhoneValid($phone): bool
     {
-        return preg_match('/^[0-9]{10}+$/', $phone);
+        // $countries = json_decode(file_get_contents(__DIR__ . '/../../Data/states.json'), true);
+        // $phoneCodes = array_column($countries,'code');
+        return preg_match('/^[0-9]+$/', $phone) && strlen($phone) > 9;
     }
 
     private function getConfigVal($key, $default = '')
@@ -148,12 +150,12 @@ trait Sender
         ];
 
 
-        // if (!$this->isPhoneValid($phone)) {
-        //     $smsParams['response'] = json_encode(['error' => __('sms::app.errors.invalid-phone-number')]);
-        //     $smsParams['to'] = 'unknown';
-        //     $sms = $this->sMSRepository->create($smsParams);
-        //     return;
-        // }
+        if (!$this->isPhoneValid($phone)) {
+            $smsParams['response'] = json_encode(['error' => __('sms::app.errors.invalid-phone-number')]);
+            $smsParams['to'] = 'unknown';
+            $sms = $this->sMSRepository->create($smsParams);
+            return;
+        }
 
         $client = $this->getClient();
 
@@ -172,7 +174,7 @@ trait Sender
                             "body" => $message
                         ]
                     );
-                $sent = $response->status == 'sent';
+                $sent = ($response->status == 'sent' || $response->status == 'queued');
                 $sentPhone = $response->to;
                 $balance = 'pending';
                 $responseText = json_encode($response);
@@ -188,6 +190,9 @@ trait Sender
                 $sentPhone = $response->messages[0]->recipient;
                 $balance = $response->balance;
             }
+            $status = $response->sent;
+
+            Log::error('MESSAGE STATUS', compact('status'));
 
             $sms = $this->sMSRepository->find($sms->id);
             $sms->update([
