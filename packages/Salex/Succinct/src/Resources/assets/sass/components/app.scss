@@ -1031,14 +1031,29 @@
             input,
             select,
             textarea {
-                margin-top: 6px;
-                border: 1px solid #D8D8D8;
-                border-radius: 12px;
-                font-size: 13px;
-                padding: 12px 16px;
-                resize: none;
                 width: 100%;
+                resize: none;
+                font-size: 16px;
+                padding: 5px 16px;
+                border-radius: 1px;
                 background: $button-text-color;
+                border: 1px solid $border-common;
+            }
+
+            .rounded-form {
+
+                input,
+                select,
+                textarea {
+                    margin-top: 6px;
+                    border: 1px solid #D8D8D8;
+                    border-radius: 12px;
+                    font-size: 13px;
+                    padding: 12px 16px;
+                    resize: none;
+                    width: 100%;
+                    background: $button-text-color;
+                }
             }
 
             input[type='search'] {
@@ -1095,6 +1110,7 @@
                     font-weight: 300;
                     padding-top: 3px;
                 }
+
                 .profile-label {
                     font-weight: 600;
                     font-size: 12px;
@@ -1727,7 +1743,7 @@
         z-index: 100;
         position: sticky;
         background: white;
-        padding: 0 6% 0 8%;
+        padding: 0 6% 0 6%;
 
         &.header-shadow {
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
@@ -1833,7 +1849,7 @@
     padding: 0px !important;
     background: $white-color;
     position: absolute !important;
-    margin: 0 0 0 8%;
+    margin: 0 0 0 6%;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 
     .category {
