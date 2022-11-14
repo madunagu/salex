@@ -1746,8 +1746,9 @@
         padding: 0 6% 0 6%;
 
         &.header-shadow {
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
-                0 3px 6px rgba(0, 0, 0, 0.23);
+            // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
+                // 0 3px 6px rgba(0, 0, 0, 0.23);
+            border-bottom: 1px solid #e5e5e5;
         }
     }
 }
@@ -2377,8 +2378,8 @@
     z-index: 10;
     margin: 0 !important;
     padding: 0 6%;
-    border-top: 1px solid #E5E5E5;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);
+    border: 1px solid #E5E5E5;
+    // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);
 }
 
 .new-products-recent {

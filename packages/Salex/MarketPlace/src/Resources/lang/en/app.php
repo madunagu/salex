@@ -70,6 +70,7 @@ return [
     'merchants'=> [
         'login-title'=> 'Merchant Login',
         'register-title'=> 'Merchant Registration',
+        'account'=> 'Merchant Account'
     ],
     'drivers'=> [
         'login-title'=> 'Driver Login',

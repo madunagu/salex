@@ -127,9 +127,13 @@ class SaleController extends Controller
 
         $this->merchant = auth()->guard('merchant')->user();
 
-        $data['vendor_id'] = $this->merchant->store_id;
+        // $data['vendor_id'] = $this->merchant->store_id;
 
         $product = $this->productRepository->create($data);
+
+        $product->vendor_id = $this->merchant->store_id;
+
+        $product->save();
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Product']));
 
@@ -191,7 +195,7 @@ class SaleController extends Controller
     {
         $data = request()->all();
 
-        $data['locale'] = 'en';
+        // $data['locale'] = 'en';
         //TODO: remove this quick fix
 
         $multiselectAttributeCodes = [];

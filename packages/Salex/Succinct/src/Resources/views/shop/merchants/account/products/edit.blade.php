@@ -175,11 +175,6 @@ $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
             'bagisto.admin.catalog.product.edit_form_accordian.additional_views.after',
             ['product' => $product])
             !!}
-
-
-        <button type="submit" class="theme-btn mb20">
-            {{ __('velocity::app.shop.general.update') }}
-        </button>
     </div>
 </form>
 

@@ -213,9 +213,7 @@ class SMSController extends Controller
 
         $sms = $this->smsRepository->create($data);
 
-
-        //TODO: DULY CHANGE
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Customer']));
+        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'SMS']));
 
         return redirect()->route($this->_config['redirect']);
     }

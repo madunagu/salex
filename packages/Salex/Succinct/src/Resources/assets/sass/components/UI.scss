@@ -2,7 +2,7 @@
     height: 36px;
     display: inline-block;
 
-    > * {
+    >* {
         height: 36px;
         padding: 0px 10px;
         border: 1px solid $border-common;
@@ -11,20 +11,20 @@
         display: inline-block;
     }
 
-    > *:not(:first-child) {
+    >*:not(:first-child) {
         border-left: none;
         position: relative;
     }
 
-    > *:not(:nth-child(2)) {
+    >*:not(:nth-child(2)) {
         @extend .cursor-pointer;
     }
 
-    > *:nth-child(2) {
+    >*:nth-child(2) {
         left: -4px;
     }
 
-    > *:nth-child(3) {
+    >*:nth-child(3) {
         left: -7px;
     }
 }
@@ -96,8 +96,8 @@
         right: 34px;
         top: 8px;
     }
-    
-    &::after { 
+
+    &::after {
         background-image: url(../images/icon-calendar.svg);
         width: 24px;
         height: 24px;
@@ -111,8 +111,284 @@
     }
 }
 
-.rtl{
-    #date-of-birth:after{
+.rtl {
+    #date-of-birth:after {
         left: 54px;
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dashboard .dashboard-stats .dashboard-card {
+    height: 100px;
+    background: #fff;
+    border: 1px solid hsla(0, 0%, 63.5%, .2);
+    box-shadow: 0 5px 10px 2px hsla(0, 0%, 64%, .2);
+    border-radius: 5px;
+    position: relative;
+    padding: 15px
+}
+
+.dark-mode .dashboard .card {
+    background: #071e37;
+    box-shadow: 0 5px 10px 2px rgba(0, 0, 0, .8)
+}
+
+.dark-mode .dashboard .card .card-title {
+    color: hsla(0, 0%, 100%, .8)
+}
+
+.dark-mode .dashboard .card .card-info ul li .description {
+    margin-top: 10px
+}
+
+.dark-mode .dashboard .card .card-info ul li .description .name {
+    color: hsla(0, 0%, 100%, .8)
+}
+
+.dark-mode .dashboard .card .card-info ul li .description .info {
+    color: hsla(0, 0%, 100%, .8);
+    margin-top: 5px
+}
+
+.dark-mode .dashboard .card .card-info .no-result-found p {
+    color: hsla(0, 0%, 100%, .8)
+}
+
+.dark-mode .dashboard .dashboard-stats .dashboard-card {
+    background: #071e37;
+    box-shadow: 0 5px 10px 2px rgba(0, 0, 0, .8)
+}
+
+.dark-mode .dashboard .dashboard-stats .dashboard-card .title {
+    color: hsla(0, 0%, 100%, .8)
+}
+
+.dark-mode .dashboard .dashboard-stats .dashboard-card .data {
+    color: #fff
+}
+
+.dark-mode .dashboard .dashboard-stats .dashboard-card .data .progress {
+    color: hsla(0, 0%, 100%, .8)
+}
+
+.dashboard .page-header {
+    margin-bottom: 0 !important;
+    padding-bottom: 15px;
+    border-bottom: 1px solid hsla(0, 0%, 63.5%, .2)
+}
+
+.dashboard .page-header .control-group span {
+    width: 100%
+}
+
+.dashboard .page-header .control-group.date:after {
+    margin-top: -13px;
+    left: 100%
+}
+
+.dashboard .page-content {
+    margin-top: 15px
+}
+
+.dashboard .card {
+    height: 445px;
+    background-color: #fff;
+    border: 1px solid hsla(0, 0%, 63.5%, .2);
+    box-shadow: 0 5px 10px 2px hsla(0, 0%, 63.5%, .2);
+    border-radius: .25rem;
+    padding: 20px 0 0 20px;
+    overflow: auto
+}
+
+.dashboard .card .card-title {
+    font-size: 14px;
+    color: #3a3a3a;
+    letter-spacing: -.26px;
+    text-transform: uppercase
+}
+
+.dashboard .card .card-info {
+    width: 100%;
+    display: inline-block
+}
+
+.dashboard .card .card-info.center {
+    text-align: center
+}
+
+.dashboard .card .card-info ul li {
+    border-bottom: 1px solid hsla(0, 0%, 63.5%, .2);
+    width: 100%;
+    display: inline-block;
+    padding: 10px 0;
+    position: relative
+}
+
+.dashboard .card .card-info ul li .image {
+    height: 60px;
+    width: 60px;
+    float: left;
+    margin-right: 15px
+}
+
+.dashboard .card .card-info ul li .image.product {
+    background: #f2f2f2
+}
+
+.dashboard .card .card-info ul li .image img {
+    width: 100%
+}
+
+.dashboard .card .card-info ul li .description {
+    margin-top: 10px
+}
+
+.dashboard .card .card-info ul li .description .name {
+    color: #3a3a3a
+}
+
+.dashboard .card .card-info ul li .description .info {
+    color: #3a3a3a;
+    margin-top: 5px
+}
+
+.dashboard .card .card-info ul li .icon.angle-right-icon {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    margin-top: -8px
+}
+
+.dashboard .card .card-info ul li:last-child {
+    border-bottom: 0
+}
+
+.dashboard .card .card-info .no-result-found {
+    margin-top: 146px
+}
+
+.dashboard .card .card-info .no-result-found p {
+    margin: 0;
+    color: #3a3a3a
+}
+
+.dashboard .dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-auto-rows: auto;
+    grid-column-gap: 30px;
+    grid-row-gap: 15px
+}
+
+.dashboard .dashboard-stats .dashboard-card {
+    height: 100px;
+    background: #fff;
+    border: 1px solid hsla(0, 0%, 63.5%, .2);
+    box-shadow: 0 5px 10px 2px hsla(0, 0%, 63.5%, .2);
+    border-radius: 5px;
+    position: relative;
+    padding: 15px
+}
+
+.dashboard .dashboard-stats .dashboard-card .title {
+    font-size: 14px;
+    color: #3a3a3a;
+    text-transform: uppercase
+}
+
+.dashboard .dashboard-stats .dashboard-card .data {
+    padding-top: 13px;
+    font-size: 32px;
+    color: #0041ff
+}
+
+.dashboard .dashboard-stats .dashboard-card .data .progress {
+    font-size: 14px;
+    color: #8e8e8e;
+    float: right;
+    margin-top: -2px
+}
+
+.dashboard .dashboard-stats .dashboard-card .data .progress .icon {
+    vertical-align: middle
+}
+
+.dashboard .graph-stats {
+    margin-top: 30px;
+    width: 100%;
+    display: inline-block
+}
+
+.dashboard .graph-stats .left-card-container {
+    float: left;
+    width: 75%;
+    padding-right: 9px
+}
+
+.dashboard .graph-stats .right-card-container {
+    float: left;
+    width: 25%;
+    padding-left: 21px
+}
+
+.dashboard .sale-stock {
+    width: 100%;
+    display: inline-block;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(435px, 1fr));
+    grid-auto-rows: auto;
+    grid-column-gap: 30px;
+    grid-row-gap: 15px;
+    margin-top: 30px
+}
+
+.accordian.error .accordian-header,
+accordian.error .accordian-header {
+    color: #ff5656 !important;
+}
+
+.accordian .accordian-header,
+.accordian div[slot*=header],
+accordian .accordian-header,
+accordian div[slot*=header] {
+    width: 100%;
+    display: inline-block;
+    font-size: 18px;
+    color: #3a3a3a;
+    border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 20px 15px;
+    cursor: pointer;
+    margin-top: -1px;
+}
+
+.accordian-down-icon:before {
+    content: "\E906";
+
+}
+
+.accordian-down-icon {
+    float: right;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: Webkul Rango !important;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 1;
+    text-transform: none;
 }
