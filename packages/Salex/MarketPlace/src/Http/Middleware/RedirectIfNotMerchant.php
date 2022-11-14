@@ -27,6 +27,12 @@ class RedirectIfNotMerchant
                 
                 return redirect()->route('merchant.session.index');
             }
+            if (Auth::guard($guard)->user()->store_id == 0 && $request->route()->action['as']!='merchant.store.create' && $request->route()->action['as']!='merchant.session.destroy') {
+
+                session()->flash('warning', trans('marketplace::app.account.store-empty'));
+                
+                return redirect()->route('merchant.store.create');
+            }
         }
 
         return $next($request);
