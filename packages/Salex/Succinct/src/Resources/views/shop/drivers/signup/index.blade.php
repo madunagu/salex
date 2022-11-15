@@ -1,7 +1,7 @@
 @extends('shop::layouts.master')
 
 @section('page_title')
-    {{ __('shop::app.customer.signup-form.page-title') }}
+{{ __('marketplace::app.drivers.register-title') }}
 @endsection
 
 @section('content-wrapper')
@@ -13,7 +13,7 @@
                         {{ __('velocity::app.customer.signup-form.user-registration')}}
                     </h2>
 
-                    <a href="{{ route('shop.customer.session.index') }}" class="btn-new-customer">
+                    <a href="{{ route('driver.session.index') }}" class="btn-new-customer">
                         <button type="button" class="theme-btn light">
                             {{ __('velocity::app.customer.signup-form.login')}}
                         </button>
@@ -26,14 +26,14 @@
                     </h3>
 
                     <p class="fs16">
-                        {{ __('velocity::app.customer.signup-form.form-signup-text')}}
+                    {{ __('marketplace::app.drivers.register-title') }}
                     </p>
 
                     {!! view_render_event('bagisto.shop.customers.signup.before') !!}
 
                     <form
                         method="post"
-                        action="{{ route('shop.customer.register.create') }}"
+                        action="{{ route('driver.register.create') }}"
                         @submit.prevent="onSubmit">
 
                         {{ csrf_field() }}
@@ -93,6 +93,25 @@
                         </div>
 
                         {!! view_render_event('bagisto.shop.customers.signup_form_controls.email.after') !!}
+
+                        <div class="control-group" :class="[errors.has('phone') ? 'has-error' : '']">
+                            <label for="phone" class="required label-style">
+                                {{ __('shop::app.customer.account.profile.phone') }}
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-style"
+                                name="phone"
+                                v-validate="'required'"
+                                value="{{ old('phone') }}"
+                                data-vv-as="&quot;{{ __('shop::app.customer.account.profile.phone') }}&quot;" />
+
+                            <span class="control-error" v-if="errors.has('phone')" v-text="errors.first('phone')"></span>
+                        </div>
+
+                        {!! view_render_event('bagisto.shop.customers.signup_form_controls.phone.after') !!}
+                    
 
                         <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                             <label for="password" class="required label-style">

@@ -75,7 +75,6 @@ class DriverDashboardController extends Controller
         protected ProductInventoryRepository $productInventoryRepository
     ) {
         $this->_config = request('_config');
-        $this->driverId = auth()->guard('driver')->user()->id;
     }
 
     /**
@@ -86,6 +85,8 @@ class DriverDashboardController extends Controller
     public function index()
     {
         $this->setStartEndDate();
+
+        $this->driverId = auth()->guard('driver')->user()->id;
 
         $statistics = [
             /**

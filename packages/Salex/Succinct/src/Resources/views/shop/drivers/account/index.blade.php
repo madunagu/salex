@@ -3,11 +3,11 @@
 @section('content-wrapper')
     <div class="account-content row no-margin velocity-divide-page">
         <div class="sidebar left">
-            @include('shop::customers.account.partials.sidemenu')
+            @include('succinct::drivers.account.partials.sidemenu')
         </div>
 
         <div class="account-layout right mt10">
-            @if (request()->route()->getName() !== 'shop.customer.profile.index')
+            @if (request()->route()->getName() !== 'driver.profile.index')
                 @if (Breadcrumbs::exists())
                     {{ Breadcrumbs::render() }}
                 @endif

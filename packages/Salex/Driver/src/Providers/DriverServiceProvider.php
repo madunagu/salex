@@ -71,7 +71,7 @@ class DriverServiceProvider extends ServiceProvider
     */
     protected function composeView()
     {
-        view()->composer('elegant::drivers.account.partials.sidemenu', function ($view) {
+        view()->composer(['elegant::drivers.account.partials.sidemenu','succinct::drivers.account.partials.sidemenu'], function ($view) {
             $tree = Tree::create();
 
             foreach (config('menu.driver') as $item) {

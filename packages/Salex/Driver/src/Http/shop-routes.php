@@ -29,13 +29,13 @@ Route::group([
      */
     Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->defaults('_config', [
         'view' => 'elegant::drivers.signup.forgot-password',
-    ])->name('driver.forgot-password.create');
+    ])->name('driver.forgot_password.create');
 
     Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('driver.forgot-password.store');
 
     Route::get('/reset-password/{token}', [ResetPasswordController::class, 'create'])->defaults('_config', [
         'view' => 'elegant::drivers.signup.reset-password',
-    ])->name('driver.reset-password.create');
+    ])->name('driver.resend.verification_email');
 
     Route::post('/reset-password', [ResetPasswordController::class, 'store'])->defaults('_config', [
         'redirect' => 'driver.profile.index',

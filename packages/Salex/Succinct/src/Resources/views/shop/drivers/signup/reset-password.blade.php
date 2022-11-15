@@ -24,7 +24,7 @@
                         <form
                             method="POST"
                             @submit.prevent="onSubmit"
-                            action="{{ route('shop.customer.reset_password.store') }}">
+                            action="{{ route('driver.reset-password.store') }}">
 
                             {{ csrf_field() }}
 

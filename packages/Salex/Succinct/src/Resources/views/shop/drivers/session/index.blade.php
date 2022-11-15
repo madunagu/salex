@@ -1,7 +1,7 @@
 @extends('shop::layouts.master')
 
 @section('page_title')
-    {{ __('shop::app.customer.login-form.page-title') }}
+{{ __('marketplace::app.drivers.login-title') }}
 @endsection
 
 @section('content-wrapper')
@@ -13,10 +13,10 @@
                 <div class="col-lg-10 col-md-12 offset-lg-1">
                     <div class="heading">
                         <h2 class="fs24 fw6">
-                            {{ __('velocity::app.customer.login-form.customer-login')}}
+                        {{ __('marketplace::app.drivers.login-title') }}
                         </h2>
 
-                        <a href="{{ route('shop.customer.register.index') }}" class="btn-new-customer">
+                        <a href="{{ route('driver.register.index') }}" class="btn-new-customer">
                             <button type="button" class="theme-btn light">
                                 {{ __('velocity::app.customer.login-form.sign-up')}}
                             </button>
@@ -26,7 +26,7 @@
                     <div class="body col-12">
                         <div class="form-header">
                             <h3 class="fw6">
-                                {{ __('velocity::app.customer.login-form.registered-user')}}
+                            {{ __('marketplace::app.drivers.login-title') }}
                             </h3>
 
                             <p class="fs16">
@@ -36,13 +36,12 @@
 
                         <form
                             method="POST"
-                            action="{{ route('shop.customer.session.create') }}"
+                            action="{{ route('driver.session.create') }}"
                             @submit.prevent="onSubmit">
 
                             {{ csrf_field() }}
 
-                            {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}
-
+                      
                             <div class="form-group" :class="[errors.has('email') ? 'has-error' : '']">
                                 <label for="email" class="mandatory label-style">
                                     {{ __('shop::app.customer.login-form.email') }}
@@ -82,7 +81,7 @@
 
                                 {{ __('shop::app.customer.login-form.show-password') }}
 
-                                <a href="{{ route('shop.customer.forgot_password.create') }}" class=" show-password float-right">
+                                <a href="{{ route('driver.forgot_password.create') }}" class=" show-password float-right">
                                     {{ __('shop::app.customer.login-form.forgot_pass') }}  
                                 </a>
 
@@ -90,7 +89,7 @@
                                     <span class="control-error" v-if="errors.has('password')" v-text="errors.first('password')"></span>
                                     @if (Cookie::has('enable-resend'))
                                         @if (Cookie::get('enable-resend') == true)
-                                            <a href="{{ route('shop.customer.resend.verification_email', Cookie::get('email-for-resend')) }}">{{ __('shop::app.customer.login-form.resend-verification') }}</a>
+                                            <a href="{{ route('driver.resend.verification_email', Cookie::get('email-for-resend')) }}">{{ __('shop::app.customer.login-form.resend-verification') }}</a>
                                         @endif
                                     @endif
                                 </div>
