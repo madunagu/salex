@@ -32,6 +32,7 @@
         "lazysizes": "^5.2.2",
         "material-icons": "^1.10.6",
         "vee-validate": "^2.2.15",
-        "vue-slider-component": "^3.2.15"
+        "vue-slider-component": "^3.2.15",
+        "vue2-google-maps": "^0.10.7"
     }
 }

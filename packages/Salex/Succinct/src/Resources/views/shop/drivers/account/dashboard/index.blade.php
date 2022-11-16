@@ -22,214 +22,213 @@
 
 <div class="account-items-list dashboard">
     <div class="account-table-content">
-    <div class="dashboard-stats">
+        <div class="dashboard-stats">
 
-<div class="dashboard-card">
-    <div class="title">
-        {{ __('driver::app.dashboard.total-vehicles') }}
-    </div>
-    <a href="{{ route('admin.customer.index') }}">
-        <div class="data">
-            {{ $statistics['total_vehicles']['current'] }}
+            <div class="dashboard-card">
+                <div class="title">
+                    {{ __('driver::app.dashboard.total-vehicles') }}
+                </div>
+                <a href="{{ route('admin.customer.index') }}">
+                    <div class="data">
+                        {{ $statistics['total_vehicles']['current'] }}
 
-            <span class="progress">
-                @if ($statistics['total_vehicles']['progress'] < 0) <span class="icon graph-down-icon"></span>
-            {{ __('admin::app.dashboard.decreased', [
+                        <span class="progress">
+                            @if ($statistics['total_vehicles']['progress'] < 0) <span class="icon graph-down-icon"></span>
+                        {{ __('admin::app.dashboard.decreased', [
                 'progress' => -number_format($statistics['total_vehicles']['progress'], 1)
             ])
         }}
-            @else
-            <span class="icon graph-up-icon"></span>
-            {{ __('admin::app.dashboard.increased', [
+                        @else
+                        <span class="icon graph-up-icon"></span>
+                        {{ __('admin::app.dashboard.increased', [
                 'progress' => number_format($statistics['total_vehicles']['progress'], 1)
             ])
         }}
-            @endif
-            </span>
-        </div>
-    </a>
-</div>
+                        @endif
+                        </span>
+                    </div>
+                </a>
+            </div>
 
-<div class="dashboard-card">
-    <div class="title">
-        {{ __('driver::app.dashboard.total-shipments') }}
-    </div>
-    <a href="{{ route('admin.sales.orders.index') }}">
-        <div class="data">
-            {{ $statistics['total_shipments']['current'] }}
+            <div class="dashboard-card">
+                <div class="title">
+                    {{ __('driver::app.dashboard.total-shipments') }}
+                </div>
+                <a href="{{ route('admin.sales.orders.index') }}">
+                    <div class="data">
+                        {{ $statistics['total_shipments']['current'] }}
 
-            <span class="progress">
-                @if ($statistics['total_shipments']['progress'] < 0) <span class="icon graph-down-icon"></span>
-            {{ __('admin::app.dashboard.decreased', [
+                        <span class="progress">
+                            @if ($statistics['total_shipments']['progress'] < 0) <span class="icon graph-down-icon"></span>
+                        {{ __('admin::app.dashboard.decreased', [
                 'progress' => -number_format($statistics['total_shipments']['progress'], 1)
             ])
         }}
-            @else
-            <span class="icon graph-up-icon"></span>
-            {{ __('admin::app.dashboard.increased', [
+                        @else
+                        <span class="icon graph-up-icon"></span>
+                        {{ __('admin::app.dashboard.increased', [
                 'progress' => number_format($statistics['total_shipments']['progress'], 1)
             ])
         }}
-            @endif
-            </span>
-        </div>
-    </a>
-</div>
+                        @endif
+                        </span>
+                    </div>
+                </a>
+            </div>
 
-<div class="dashboard-card">
-    <div class="title">
-        {{ __('driver::app.dashboard.total-revenue') }}
-    </div>
+            <div class="dashboard-card">
+                <div class="title">
+                    {{ __('driver::app.dashboard.total-revenue') }}
+                </div>
 
-    <div class="data">
-        {{ core()->formatBasePrice($statistics['total_revenue']['current']) }}
+                <div class="data">
+                    {{ core()->formatBasePrice($statistics['total_revenue']['current']) }}
 
-        <span class="progress">
-            @if ($statistics['total_revenue']['progress'] < 0) <span class="icon graph-down-icon"></span>
-        {{ __('admin::app.dashboard.decreased', [
+                    <span class="progress">
+                        @if ($statistics['total_revenue']['progress'] < 0) <span class="icon graph-down-icon"></span>
+                    {{ __('admin::app.dashboard.decreased', [
             'progress' => -number_format($statistics['total_revenue']['progress'], 1)
         ])
     }}
-        @else
-        <span class="icon graph-up-icon"></span>
-        {{ __('admin::app.dashboard.increased', [
+                    @else
+                    <span class="icon graph-up-icon"></span>
+                    {{ __('admin::app.dashboard.increased', [
             'progress' => number_format($statistics['total_revenue']['progress'], 1)
         ])
     }}
-        @endif
-        </span>
-    </div>
-</div>
+                    @endif
+                    </span>
+                </div>
+            </div>
 
-<div class="dashboard-card">
-    <div class="title">
-        {{ __('driver::app.dashboard.average-revenue') }}
-    </div>
+            <div class="dashboard-card">
+                <div class="title">
+                    {{ __('driver::app.dashboard.average-revenue') }}
+                </div>
 
-    <div class="data">
-        {{ core()->formatBasePrice($statistics['avg_revenue']['current']) }}
+                <div class="data">
+                    {{ core()->formatBasePrice($statistics['avg_revenue']['current']) }}
 
-        <span class="progress">
-            @if ($statistics['avg_revenue']['progress'] < 0) <span class="icon graph-down-icon"></span>
-        {{ __('admin::app.dashboard.decreased', [
+                    <span class="progress">
+                        @if ($statistics['avg_revenue']['progress'] < 0) <span class="icon graph-down-icon"></span>
+                    {{ __('admin::app.dashboard.decreased', [
             'progress' => -number_format($statistics['avg_revenue']['progress'], 1)
         ])
     }}
-        @else
-        <span class="icon graph-up-icon"></span>
-        {{ __('admin::app.dashboard.increased', [
+                    @else
+                    <span class="icon graph-up-icon"></span>
+                    {{ __('admin::app.dashboard.increased', [
             'progress' => number_format($statistics['avg_revenue']['progress'], 1)
         ])
     }}
-        @endif
-        </span>
-    </div>
-</div>
-
-<div class="dashboard-card">
-    <div class="title">
-        {{ __('driver::app.dashboard.total-unshipped-orders') }}
-    </div>
-
-    <div class="data">
-        {{ core()->formatBasePrice($statistics['total_unshipped_orders']) }}
-    </div>
-</div>
-
-</div>
-
-
-<div class="graph-stats">
-<div class="left-card-container graph">
-    <div class="card" style="overflow: hidden;">
-        <div class="card-title" style="margin-bottom: 30px;">
-            {{ __('driver::app.dashboard.deliveries') }}
-        </div>
-
-        <div class="card-info" style="height: 100%;">
-
-            <canvas id="myChart" style="width: 100%; height: 87%"></canvas>
-
-        </div>
-    </div>
-</div>
-<div class="card">
-    <div class="card-title">
-        {{ __('admin::app.dashboard.customer-with-most-sales') }}
-    </div>
-
-    <div class="card-info {{ !count($statistics['customer_with_most_shipments']) ? 'center' : '' }}">
-        <ul>
-
-            @foreach ($statistics['customer_with_most_shipments'] as $item)
-
-            <li>
-                @if ($item->customer_id)
-                <a href="{{ route('admin.customer.edit', $item->customer_id) }}">
                     @endif
+                    </span>
+                </div>
+            </div>
 
-                    <div class="image">
-                        <span class="icon profile-pic-icon"></span>
+            <div class="dashboard-card">
+                <div class="title">
+                    {{ __('driver::app.dashboard.total-unshipped-orders') }}
+                </div>
+
+                <div class="data">
+                    {{ core()->formatBasePrice($statistics['total_unshipped_orders']) }}
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="graph-stats">
+            <div class="left-card-container graph">
+                <div class="card" style="overflow: hidden;">
+                    <div class="card-title" style="margin-bottom: 30px;">
+                        {{ __('driver::app.dashboard.deliveries') }}
                     </div>
 
-                    <div class="description do-not-cross-arrow">
-                        <div class="name ellipsis">
-                            {{ $item->customer_full_name }}
-                        </div>
+                    <div class="card-info" style="height: 100%;">
 
-                        <div class="info">
-                            {{ __('admin::app.dashboard.order-count', ['count' => $item->total_shipments]) }}
-                            &nbsp;.&nbsp;
-                            {{ __('admin::app.dashboard.revenue', [
+                        <canvas id="myChart" style="width: 100%; height: 87%"></canvas>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">
+                    {{ __('admin::app.dashboard.customer-with-most-sales') }}
+                </div>
+
+                <div class="card-info {{ !count($statistics['customer_with_most_shipments']) ? 'center' : '' }}">
+                    <ul>
+
+                        @foreach ($statistics['customer_with_most_shipments'] as $item)
+
+                        <li>
+                            @if ($item->customer_id)
+                            <a href="{{ route('admin.customer.edit', $item->customer_id) }}">
+                                @endif
+
+                                <div class="image">
+                                    <span class="icon profile-pic-icon"></span>
+                                </div>
+
+                                <div class="description do-not-cross-arrow">
+                                    <div class="name ellipsis">
+                                        {{ $item->customer_full_name }}
+                                    </div>
+
+                                    <div class="info">
+                                        {{ __('admin::app.dashboard.order-count', ['count' => $item->total_shipments]) }}
+                                        &nbsp;.&nbsp;
+                                        {{ __('admin::app.dashboard.revenue', [
                         'total' => core()->formatBasePrice($item->total_shipments)
                         ])
                     }}
-                        </div>
+                                    </div>
+                                </div>
+
+                                <span class="icon angle-right-icon"></span>
+
+                                @if ($item->customer_id)
+                            </a>
+                            @endif
+                        </li>
+
+                        @endforeach
+
+                    </ul>
+
+                    @if (! count($statistics['customer_with_most_shipments']))
+
+                    <div class="no-result-found">
+
+                        <i class="icon no-result-icon"></i>
+                        <p>{{ __('admin::app.common.no-result-found') }}</p>
+
                     </div>
 
-                    <span class="icon angle-right-icon"></span>
+                    @endif
+                </div>
 
-                    @if ($item->customer_id)
-                </a>
-                @endif
-            </li>
+            </div>
 
-            @endforeach
-
-        </ul>
-
-        @if (! count($statistics['customer_with_most_shipments']))
-
-        <div class="no-result-found">
-
-            <i class="icon no-result-icon"></i>
-            <p>{{ __('admin::app.common.no-result-found') }}</p>
 
         </div>
 
-        @endif
-    </div>
+        <div class="google-map">
 
-</div>
+            <div class="card" style="overflow: hidden;padding: 20px 15px 0px 20px;">
+                <div class="card-title" style="margin-bottom: 30px;">
+                    {{ __('driver::app.dashboard.deliveries') }}
+                </div>
 
+                <div class="card-info" style="height: 100%;">
 
-</div>
+                    <div id="gmap" style="width: 100%; height: 87%"></div>
+                </div>
+            </div>
 
-<div class="google-map">
-
-<div class="card" style="overflow: hidden;padding: 20px 15px 0px 20px;">
-    <div class="card-title" style="margin-bottom: 30px;">
-        {{ __('driver::app.dashboard.deliveries') }}
-    </div>
-
-    <div class="card-info" style="height: 100%;">
-
-        <div id="gmap" style="width: 100%; height: 87%"></div>
-
-    </div>
-</div>
-
-</div>
+        </div>
     </div>
 </div>
 

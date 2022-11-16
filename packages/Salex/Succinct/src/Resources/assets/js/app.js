@@ -6,6 +6,7 @@ import Vue         from 'vue';
 import VeeValidate from 'vee-validate';
 import VueCarousel from 'vue-carousel';
 import translate   from '@components/trans';
+import * as VueGoogleMaps from "vue2-google-maps";
 import './bootstrap';
 
 /**
@@ -37,6 +38,14 @@ Vue.use(VeeValidate, {
         zh_CN: zh_CN
     },
     events: 'input|change|blur'
+});
+
+Vue.config.productionTip = false
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "AIzaSyAEcE-_JoQopxEgq_Lo-zKb63p9DlHKAn4",
+    libraries: "places"
+  }
 });
 
 /**
@@ -86,6 +95,7 @@ Vue.component('hot-categories', () => import('@components/hot-categories'));
 Vue.component('popular-category', () => import('@components/popular-category'));
 Vue.component('popular-categories', () => import('@components/popular-categories'));
 Vue.component('velocity-overlay-loader', () => import('@components/overlay-loader'));
+Vue.component('google-map', () => import('@components/google-map'));
 Vue.component('vnode-injector', {
     functional: true,
     props: ['nodes'],

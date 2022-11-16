@@ -2,11 +2,16 @@
     <div :class="`dropdown ${cartItems.length > 0 ? '' : 'disable-active'}`">
         <div class="dropdown-toggle btn btn-link" id="mini-cart" :class="{'cursor-not-allowed': ! cartItems.length}">
             <div class="mini-cart-content">
+                <div class="cart-text" v-text="cartText"></div>
                 <i class="material-icons-outlined">shopping_cart</i>
                 <div class="badge-container">
                     <span class="badge" v-text="cartItems.length" v-if="cartItems.length != 0"></span>
                 </div>
-                <span class="fs18 fw6 cart-text" v-text="cartText"></span>
+                <span class="fs18 fw6">{{
+                        isTaxInclusive == '1'
+                            ? cartInformation.base_grand_total
+                            : cartInformation.base_sub_total
+                    }}</span>
             </div>
 
             <div class="down-arrow-container">

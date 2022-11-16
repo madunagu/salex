@@ -263,11 +263,11 @@ label {
         }
     }
 
-    > div:last-child {
+    >div:last-child {
         height: 32px;
     }
 
-    > div {
+    >div {
         .default {
             padding: 5px;
             font-size: 14px;
@@ -427,6 +427,7 @@ header {
         height: 45px;
         margin: 22px 0;
         border-radius: 5px;
+
         * {
             height: 100%;
         }
@@ -455,10 +456,10 @@ header {
                 // border-radius: 5px 0px 0px 5px;
                 // border: 1px solid $theme-color;
                 // border-right: 0;
-                border :0;
+                border: 0;
                 // font-family: 'Source Sans Pro', sans-serif;
                 font-family: 'Poppins', sans-serif;
-                background:transparent;
+                background: transparent;
                 color: black;
                 text-transform: uppercase;
                 padding: 13px 26px 13px 12px;
@@ -574,14 +575,21 @@ header {
                     color: $font-color;
                     display: inline-block;
 
+                    .cart-text {
+                        font-size: 10px;
+                        text-transform: uppercase;
+                        color: #C6C6C6;
+                        font-weight: 400;
+                    }
+
                     i {
-                        + span.cart-text {
+                        +span.cart-text {
                             padding-left: 0px;
                             vertical-align: text-bottom;
                         }
                     }
 
-                    + .down-arrow-container {
+                    +.down-arrow-container {
                         top: 0;
 
                         .rango-arrow-down {
@@ -913,22 +921,12 @@ header {
     border: 1px solid red;
 }
 
-.popular-products
-    .second-row
-    .popular-products-listing
-    .product-buttons
-    .add-to-cart-button
-    .btn-primary {
+.popular-products .second-row .popular-products-listing .product-buttons .add-to-cart-button .btn-primary {
     border: #26a37c !important;
     border-radius: 0px;
 }
 
-.popular-products
-    .second-row
-    .popular-products-listing
-    .product-buttons
-    .add-to-cart-button
-    .addtocart {
+.popular-products .second-row .popular-products-listing .product-buttons .add-to-cart-button .addtocart {
     text-transform: uppercase;
     background-color: #26a37c;
 }
@@ -1069,11 +1067,9 @@ i.within-circle {
         }
 
         .remove-image {
-            background-image: linear-gradient(
-                -180deg,
-                rgba(0, 0, 0, 0.08) 0%,
-                rgba(0, 0, 0, 0.24) 100%
-            );
+            background-image: linear-gradient(-180deg,
+                    rgba(0, 0, 0, 0.08) 0%,
+                    rgba(0, 0, 0, 0.24) 100%);
             @include border-radius(0 0 4px 4px);
             position: absolute;
             bottom: 0;
@@ -1142,7 +1138,7 @@ i.within-circle {
         display: grid;
         grid-template-columns: auto auto;
 
-        > div:first-child {
+        >div:first-child {
             margin-right: 0px !important;
         }
     }
@@ -1157,7 +1153,7 @@ i.within-circle {
 }
 
 .show-password {
-    margin-top:10px !important;
+    margin-top: 10px !important;
 }
 
 .category {
@@ -1188,23 +1184,23 @@ i.within-circle {
         z-index: 100;
 
         &:checked {
-            &+ .checkbox-view {
+            &+.checkbox-view {
                 background-position: 0px -21px;
             }
 
-            &+ .radio-view {
+            &+.radio-view {
                 background-position: -21px -21px;
             }
 
         }
 
         &:disabled {
-            &+ .checkbox-view {
+            &+.checkbox-view {
                 opacity: 0.5;
                 cursor: not-allowed;
             }
 
-            &+ .radio-view {
+            &+.radio-view {
                 opacity: 0.5;
                 cursor: not-allowed;
             }
@@ -1306,7 +1302,7 @@ i.within-circle {
 
                 #limit-by {
                     select {
-                        margin-left: 16px!important;
+                        margin-left: 16px !important;
                         top: -5px !important;
                         padding: 7px 9px;
                     }
@@ -1315,4 +1311,3 @@ i.within-circle {
         }
     }
 }
-

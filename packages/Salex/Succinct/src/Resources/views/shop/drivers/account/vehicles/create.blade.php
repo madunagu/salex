@@ -10,17 +10,16 @@ $driver = auth()->guard('driver')->user();
 
 @section('page-detail-wrapper')
 <div class="account-head mb-15">
-    <span class="account-heading">{{ __('driver::app.vehicles.create-title') }}</span>
+    <span class="account-heading">{{ __('driver::app.vehicles.add-title') }}</span>
 
     <span></span>
 </div>
 
 
-<form method="POST" @submit.prevent="onSubmit" action="{{ route('driver.vehicles.update',$vehicle->id) }}" enctype="multipart/form-data">
+<form method="POST" @submit.prevent="onSubmit" action="{{ route('driver.vehicles.store') }}" enctype="multipart/form-data">
 
     <div class="account-table-content">
 
-        @method('PUT')
 
         @csrf
 
