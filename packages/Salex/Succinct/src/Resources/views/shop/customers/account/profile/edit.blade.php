@@ -20,6 +20,7 @@
         enctype="multipart/form-data">
 
         <div class="account-table-content">
+            <div class="rounded-form">
             @csrf
 
             {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.before', ['customer' => $customer]) !!}
@@ -226,6 +227,7 @@
                 class="theme-btn mb20">
                 {{ __('velocity::app.shop.general.update') }}
             </button>
+            </div>
         </div>
     </form>
 

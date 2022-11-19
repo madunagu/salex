@@ -258,13 +258,17 @@ return [
         'wishlist' => [
             'remove-all-success' => 'All the items from your wishlist have been removed',
         ],
-        'sidebar'=>[
-            'hello'=> 'Hello',
-            'title'=> 'Account Data',
+        'address' => [
+            'apartment' => 'House number, apartment, building',
+            'description' => 'General indications or references',
         ],
-        'account'=> [
-            'title'=>'Personal Information',
-            'security'=>'Security',
+        'sidebar' => [
+            'hello' => 'Hello',
+            'title' => 'Account Data',
+        ],
+        'account' => [
+            'title' => 'Personal Information',
+            'security' => 'Security',
         ]
     ],
 

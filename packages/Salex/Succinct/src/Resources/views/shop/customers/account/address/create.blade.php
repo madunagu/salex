@@ -17,52 +17,77 @@ $currentCustomer = auth()->guard('customer')->user();
 
 <form method="post" action="{{ route('shop.customer.addresses.store') }}" @submit.prevent="onSubmit">
     <div class="account-table-content mb-2">
-        @csrf
+        <div class="rounded-form">
+            @csrf
 
-        <div class="row">
-            <div class="col-lg-6 col-md-6">
-                <!-- <div class="google-map" style="overflow:hidden;padding:20px;border-radius:12px">
-                    <div id="gmap" style="height: 400px;border-radius:12px;"></div>
-                </div> -->
-                <google-map></google-map>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.before') !!}
-
-                <div class="control-group" :class="[errors.has('company_name') ? 'has-error' : '']">
-                    <label for="company_name">{{ __('shop::app.customer.account.address.create.company_name') }}</label>
-
-                    <input class="control" type="text" name="company_name" value="{{ old('company_name') }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.company_name') }}&quot;">
-
-                    <span class="control-error" v-text="errors.first('company_name')" v-if="errors.has('company_name')">
-                    </span>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <google-map></google-map>
                 </div>
+                <div class="col-lg-8 col-md-6">
+                    {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.before') !!}
 
-                {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.company_name.after') !!}
+                    <div class="control-group" :class="[errors.has('company_name') ? 'has-error' : '']">
+                        <label for="company_name">{{ __('shop::app.customer.account.address.create.company_name') }}</label>
 
-                <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
-                    <label for="first_name" class="mandatory">{{ __('shop::app.customer.account.address.create.first_name') }}</label>
+                        <input class="control" type="text" name="company_name" value="{{ old('company_name') }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.company_name') }}&quot;">
 
-                    <input class="control" type="text" name="first_name" value="{{ old('first_name') ?? $currentCustomer->first_name }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.first_name') }}&quot;">
+                        <span class="control-error" v-text="errors.first('company_name')" v-if="errors.has('company_name')">
+                        </span>
+                    </div>
 
-                    <span class="control-error" v-text="errors.first('first_name')" v-if="errors.has('first_name')">
-                    </span>
-                </div>
+                    {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.company_name.after') !!}
 
-                {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.first_name.after') !!}
+                    <div class="row">
+                        <div class="col-lg-6 control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
+                            <label for="first_name" class="mandatory">{{ __('shop::app.customer.account.address.create.first_name') }}</label>
 
-                <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
-                    <label for="last_name" class="mandatory">{{ __('shop::app.customer.account.address.create.last_name') }}</label>
+                            <input class="control" type="text" name="first_name" value="{{ old('first_name') ?? $currentCustomer->first_name }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.first_name') }}&quot;">
 
-                    <input class="control" type="text" name="last_name" value="{{ old('last_name') ?? $currentCustomer->last_name }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.last_name') }}&quot;">
+                            <span class="control-error" v-text="errors.first('first_name')" v-if="errors.has('first_name')">
+                            </span>
+                        </div>
+                        {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.first_name.after') !!}
 
-                    <span class="control-error" v-text="errors.first('last_name')" v-if="errors.has('last_name')">
-                    </span>
-                </div>
+                        <div class="col-lg-6 control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
+                            <label for="last_name" class="mandatory">{{ __('shop::app.customer.account.address.create.last_name') }}</label>
 
-                {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.last_name.after') !!}
+                            <input class="control" type="text" name="last_name" value="{{ old('last_name') ?? $currentCustomer->last_name }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.last_name') }}&quot;">
 
-                <div class="control-group" :class="[errors.has('vat_id') ? 'has-error' : '']">
+                            <span class="control-error" v-text="errors.first('last_name')" v-if="errors.has('last_name')">
+                            </span>
+                        </div>
+
+                        {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.last_name.after') !!}
+                    </div>
+
+
+
+                    <div class="row">
+
+                        <div class="col-lg-6 control-group" :class="[errors.has('postcode') ? 'has-error' : '']">
+                            <label for="postcode" class="{{ core()->isPostCodeRequired() ? 'mandatory' : '' }}">{{ __('shop::app.customer.account.address.create.postcode') }}</label>
+
+                            <input class="control" type="text" name="postcode" value="{{ old('postcode') }}" v-validate="'{{ core()->isPostCodeRequired() ? 'required' : '' }}'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.postcode') }}&quot;">
+
+                            <span class="control-error" v-text="errors.first('postcode')" v-if="errors.has('postcode')">
+                            </span>
+                        </div>
+
+                        {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.postcode.after') !!}
+
+                        <div class="col-lg-6 control-group" :class="[errors.has('phone') ? 'has-error' : '']">
+                            <label for="phone" class="mandatory">{{ __('shop::app.customer.account.address.create.phone') }}</label>
+
+                            <input class="control" type="text" name="phone" value="{{ old('phone') }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.phone') }}&quot;">
+
+                            <span class="control-error" v-text="errors.first('phone')" v-if="errors.has('phone')">
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="control-group" :class="[errors.has('vat_id') ? 'has-error' : '']">
                     <label for="vat_id">{{ __('shop::app.customer.account.address.create.vat_id') }}
                         <span class="help-note">{{ __('shop::app.customer.account.address.create.vat_help_note') }}</span>
                     </label>
@@ -71,72 +96,70 @@ $currentCustomer = auth()->guard('customer')->user();
 
                     <span class="control-error" v-text="errors.first('vat_id')" v-if="errors.has('vat_id')">
                     </span>
-                </div>
+                </div> -->
 
-                {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.vat_id.after') !!}
+                    {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.vat_id.after') !!}
 
-                @php
-                $addresses = old('address1') ?? explode(PHP_EOL, '');
-                @endphp
+                    <div class="row">
+                        <div class="col-lg-6 control-group" :class="[errors.has('state') ? 'has-error' : '']">
+                            <label for="state" class="{{ core()->isStateRequired() ? 'mandatory' : '' }}">
+                                {{ __('shop::app.customer.account.address.create.state') }}
+                            </label>
 
-                <div class="control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">
-                    <label for="address_0" class="mandatory">{{ __('shop::app.customer.account.address.create.street-address') }}</label>
+                            <input class="control" id="state" type="text" name="state" value="{{ old('state') }}" v-validate="'{{ core()->isStateRequired() ? 'required' : '' }}'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.state') }}&quot;" />
+                            <span class="control-error" v-text="errors.first('state')" v-if="errors.has('state')"></span>
+                        </div>
 
-                    <input class="control" id="address_0" type="text" name="address1[]" value="{{ $addresses[0] ?: '' }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
+                        <div class="col-lg-6 control-group" :class="[errors.has('city') ? 'has-error' : '']">
+                            <label for="city" class="mandatory">{{ __('shop::app.customer.account.address.create.city') }}</label>
 
-                    <span class="control-error" v-text="'{{ $errors->first('address1.*') }}'">
-                    </span>
-                </div>
+                            <input type="text" class="control" name="city" value="{{ old('city') }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.city') }}&quot;">
 
-                @if (
-                core()->getConfigData('customer.settings.address.street_lines')
-                && core()->getConfigData('customer.settings.address.street_lines') > 1
-                )
-                @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
-                    <div class="control-group" style="margin-top: -25px;">
-                        <input class="control" id="address_{{ $i }}" type="text" name="address1[{{ $i }}]" value="{{ $addresses[$i] ?? '' }}">
-                    </div>
-                    @endfor
-                    @endif
+                            <span class="control-error" v-text="errors.first('city')" v-if="errors.has('city')">
+                            </span>
+                        </div>
 
-                    {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.street-address.after') !!}
-
-                    @include ('shop::customers.account.address.country-state', ['countryCode' => old('country'), 'stateCode' => old('state')])
-
-                    {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.country-state.after') !!}
-
-                    <div class="control-group" :class="[errors.has('city') ? 'has-error' : '']">
-                        <label for="city" class="mandatory">{{ __('shop::app.customer.account.address.create.city') }}</label>
-
-                        <input type="text" class="control" name="city" value="{{ old('city') }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.city') }}&quot;">
-
-                        <span class="control-error" v-text="errors.first('city')" v-if="errors.has('city')">
-                        </span>
                     </div>
 
                     {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.city.after') !!}
+                    @php
+                    $addresses = old('address1') ?? ["","",""];
+                    @endphp
 
-                    <div class="control-group" :class="[errors.has('postcode') ? 'has-error' : '']">
-                        <label for="postcode" class="{{ core()->isPostCodeRequired() ? 'mandatory' : '' }}">{{ __('shop::app.customer.account.address.create.postcode') }}</label>
+                    <div class="row">
 
-                        <input class="control" type="text" name="postcode" value="{{ old('postcode') }}" v-validate="'{{ core()->isPostCodeRequired() ? 'required' : '' }}'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.postcode') }}&quot;">
+                        <div class="col-lg-6 control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">
+                            <label for="address_0" class="mandatory">{{ __('shop::app.customer.account.address.create.street-address') }}</label>
 
-                        <span class="control-error" v-text="errors.first('postcode')" v-if="errors.has('postcode')">
-                        </span>
+                            <input class="control" id="address_0" type="text" name="address1[]" value="{{ $addresses[0] ?: '' }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
+
+                            <span class="control-error" v-text="'{{ $errors->first('address1.*') }}'">
+                            </span>
+                        </div>
+
+                        <div class="col-lg-6 control-group" :class="[errors.has('address1[1]') ? 'has-error' : '']">
+                            <label for="address_0" class="mandatory">{{ __('succinct::app.customer.address.apartment') }}</label>
+
+                            <input class="control" id="address_1" type="text" name="address1[1]" value="{{ $addresses[1] ?: '' }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.apartment') }}&quot;">
+
+                            <span class="control-error" v-text="'{{ $errors->first('address1.*') }}'">
+                            </span>
+                        </div>
+
                     </div>
+                    <div class="row">
+                        <div class="col-lg-12 control-group" :class="[errors.has('address1[2]') ? 'has-error' : '']">
+                            <label for="address_0" class="mandatory">{{ __('succinct::app.customer.address.description') }}</label>
 
-                    {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.postcode.after') !!}
+                            <textarea class="control" id="address_2" type="text" name="address1[2]" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.description') }}&quot;">{{ $addresses[2] ?: '' }}</textarea>
 
-                    <div class="control-group" :class="[errors.has('phone') ? 'has-error' : '']">
-                        <label for="phone" class="mandatory">{{ __('shop::app.customer.account.address.create.phone') }}</label>
-
-                        <input class="control" type="text" name="phone" value="{{ old('phone') }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.phone') }}&quot;">
-
-                        <span class="control-error" v-text="errors.first('phone')" v-if="errors.has('phone')">
-                        </span>
+                            <span class="control-error" v-text="'{{ $errors->first('address1.*') }}'">
+                            </span>
+                        </div>
                     </div>
 
                     {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.after') !!}
+
 
                     <div class="control-group d-flex">
                         <input class="w-auto" id="default_address" type="checkbox" name="default_address" {{ old('default_address') ? 'checked' : '' }}>
@@ -152,6 +175,7 @@ $currentCustomer = auth()->guard('customer')->user();
                         </button>
                     </div>
 
+                </div>
             </div>
         </div>
     </div>
@@ -163,97 +187,5 @@ $currentCustomer = auth()->guard('customer')->user();
 
 
 @push('scripts')
-
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEcE-_JoQopxEgq_Lo-zKb63p9DlHKAn4"></script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        initMap();
-    });
-
-    let map, activeInfoWindow, markers = [];
-
-    /* ----------------------------- Initialize Map ----------------------------- */
-    function initMap() {
-        console.log('initializing map');
-        map = new google.maps.Map(document.getElementById("gmap"), {
-            center: {
-                lat: 6.663988475912884,
-                lng: 3.5344982139493064,
-
-            },
-            zoom: 15
-        });
-        console.log(map);
-
-        map.addListener("click", function(event) {
-            mapClicked(event);
-        });
-
-
-
-        // initMarkers();
-    }
-
-    /* --------------------------- Initialize Markers --------------------------- */
-    function initMarkers() {
-
-        const initialMarkers = [];
-
-        for (let index = 0; index < initialMarkers.length; index++) {
-
-            const markerData = initialMarkers[index];
-            const marker = new google.maps.Marker({
-                position: markerData.position,
-                label: markerData.label,
-                draggable: markerData.draggable,
-                map
-            });
-            markers.push(marker);
-
-            const infowindow = new google.maps.InfoWindow({
-                content: `<b>Shipment ID: ${markerData.title[0]}, to ${markerData.title[1]}</b>`,
-            });
-            marker.addListener("click", (event) => {
-                if (activeInfoWindow) {
-                    activeInfoWindow.close();
-                }
-                infowindow.open({
-                    anchor: marker,
-                    shouldFocus: false,
-                    map
-                });
-                activeInfoWindow = infowindow;
-                markerClicked(marker, index);
-            });
-
-            marker.addListener("dragend", (event) => {
-                markerDragEnd(event, index);
-            });
-        }
-    }
-
-    /* ------------------------- Handle Map Click Event ------------------------- */
-    function mapClicked(event) {
-        console.log(map);
-        console.log(event.latLng.lat(), event.latLng.lng());
-    }
-
-    /* ------------------------ Handle Marker Click Event ----------------------- */
-    function markerClicked(marker, index) {
-        console.log(map);
-        console.log(marker.position.lat());
-        console.log(marker.position.lng());
-    }
-
-    /* ----------------------- Handle Marker DragEnd Event ---------------------- */
-    function markerDragEnd(event, index) {
-        console.log(map);
-        console.log(event.latLng.lat());
-        console.log(event.latLng.lng());
-    }
-</script>
-
-
 
 @endpush
