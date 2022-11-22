@@ -26,12 +26,12 @@
     <script type="text/x-template" id="cart-template">
         <div class="container">
             <section class="cart-details row no-margin col-12">
-                <h2 class="fw6 col-12">{{ __('shop::app.checkout.cart.title') }}</h2>
+                <h2 class="col-12">{{ __('shop::app.checkout.cart.title') }}</h2>
 
                 @if ($cart)
                     <div class="cart-details-header col-lg-7 col-md-12">
                         <div class="row cart-header col-12 no-padding">
-                            <span class="col-8 fw6 fs16 pr0">
+                            <!-- <span class="col-8 fw6 fs16 pr0">
                                 {{ __('velocity::app.checkout.items') }}
                             </span>
 
@@ -41,7 +41,7 @@
 
                             <span class="col-2 fw6 fs16 text-right pr0">
                                 {{ __('velocity::app.checkout.subtotal') }}
-                            </span>
+                            </span> -->
                         </div>
 
                         <div class="cart-content col-12">
@@ -98,7 +98,7 @@
                                                         title="{{ $product->name }}"
                                                         class="unset col-12 no-padding">
 
-                                                        <span class="fs20 fw6 link-color">{{ $product->name }}</span>
+                                                        <span class="fs16 fw6">{{ $product->name }}</span>
                                                     </a>
                                                 </div>
 
@@ -117,7 +117,7 @@
 
                                                 <div class="row col-12 no-padding no-margin item-price">
                                                     <div class="product-price">
-                                                        <span>{{ core()->currency($item->base_price) }}</span>
+                                                        <span class="dimmed">{{ core()->currency($item->base_price) }}</span>
                                                     </div>
                                                 </div>
 
@@ -155,8 +155,8 @@
                                                             href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}"
                                                             @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
 
-                                                            <span class="rango-delete mt-0 fs24"></span>
-                                                            <span class="align-vertical-super">{{ __('shop::app.checkout.cart.remove') }}</span>
+                                                            <span class="rango-close mt-0 fs12 link-color"></span>
+                                                            <span class="link-color">{{ __('shop::app.checkout.cart.remove') }}</span>
                                                         </a>
                                                     </div>
                                                 </div>

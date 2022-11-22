@@ -1,5 +1,5 @@
 <div>
-    <sidebar-header heading= "{{ __('velocity::app.menu-navbar.text-category') }}">
+    <sidebar-header heading="{{ __('velocity::app.menu-navbar.text-category') }}">
 
         {{-- this is default content if js is not loaded --}}
         <div class="main-category fs16 unselectable fw6 left">
@@ -17,6 +17,15 @@
         {{-- this is default content if js is not loaded --}}
         <ul type="none" class="no-margin">
         </ul>
+        {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
+
+        @include('succinct::shop.layouts.particals.wishlist', ['isText' => true])
+
+        {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
+
+        {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
+
+        @include('succinct::shop.layouts.particals.compare', ['isText' => true])
 
     </right-side-header>
 </div>

@@ -4,11 +4,6 @@
             errors.has(controlName) ? 'has-error' : ''
         }`"
     >
-        <label
-            class="required"
-            for="quantity-changer"
-            v-text="quantityText"
-        ></label>
 
         <div class="input-btn-group">
             <button type="button" class="decrease" @click="decreaseQty()">

@@ -7,7 +7,7 @@
                 <div class="badge-container">
                     <span class="badge" v-text="cartItems.length" v-if="cartItems.length != 0"></span>
                 </div>
-                <span class="fs18 fw6">{{
+                <span class="fs14 fw6">{{
                         isTaxInclusive == '1'
                             ? cartInformation.base_grand_total
                             : cartInformation.base_sub_total

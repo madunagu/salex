@@ -13,17 +13,7 @@
                 <div class="col-lg-7 col-md-12 vc-full-screen">
                     <div class="left-wrapper">
 
-                        {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
-
-                            @include('succinct::shop.layouts.particals.wishlist', ['isText' => true])
-
-                        {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
-
-                        {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
-
-                            @include('succinct::shop.layouts.particals.compare', ['isText' => true])
-
-                        {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
+                            @include('succinct::shop.layouts.particals.contact')
 
                         {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
 

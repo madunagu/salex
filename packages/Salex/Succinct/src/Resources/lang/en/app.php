@@ -298,6 +298,7 @@ return [
         'recently-viewed'   => 'Recently Viewed Products',
         'be-first-review'   => 'Be the first to write a review',
         'tax-inclusive'     => 'Inclusive of all taxes',
+        'rating-reviews'    => ':rating Ratings |   :review Reviews'
     ],
 
     'shop'          => [
