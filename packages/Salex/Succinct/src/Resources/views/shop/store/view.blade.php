@@ -3,6 +3,10 @@
 @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 @inject ('customHelper', 'Webkul\Velocity\Helpers\Helper')
 
+@php
+
+@endphp
+
 @section('page_title')
 {{ trim($product->meta_title) != "" ? $product->meta_title : $product->name }}
 @stop

@@ -456,6 +456,7 @@
                 border-radius: 12px;
                 display: inline-block;
                 border: 1px solid transparent;
+                cursor: pointer;
 
                 &.active {
                     border: 1px solid #dedede;
@@ -530,7 +531,7 @@
     margin-bottom: 60px;
 }
 
-.detail-pane{
+.detail-pane {
     margin-top: 100px;
 }
 
@@ -540,18 +541,24 @@
     margin-bottom: 46px;
 
     .btn-about-seller {
-        background-color: #0339a6!important;
-        border-radius: 9px!important;
-        color: #fff!important;
-        padding: 3px 14px!important;
+        background-color: #0339a6 !important;
+        border-radius: 9px !important;
+        color: #fff !important;
+        padding: 3px 14px !important;
         width: 100%;
     }
-    .location-text{
-        color: #0339a6;
+
+    .location-label {
+        color: #3854A6;
+        margin-bottom: 12px;
     }
-    .location-image{
+
+    .location-image {
         overflow: hidden;
         border-radius: 12px;
+    }
+    .social-icons{
+        color: #C5C5C5;
     }
 
     .reviews {

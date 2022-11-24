@@ -298,7 +298,11 @@ return [
         'recently-viewed'   => 'Recently Viewed Products',
         'be-first-review'   => 'Be the first to write a review',
         'tax-inclusive'     => 'Inclusive of all taxes',
-        'rating-reviews'    => ':rating Ratings |   :review Reviews'
+        'rating-reviews'    => ':rating Ratings |   :review Reviews',
+        'share-product'     => 'Share This Product',
+        'arrival-date'           => 'Arrives: :date',
+        'order-before'           => 'Receive your product directly to the door of your house. Place the order before :time'
+
     ],
 
     'shop'          => [
