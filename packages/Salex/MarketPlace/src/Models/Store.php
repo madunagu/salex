@@ -51,7 +51,7 @@ class Store extends TranslatableModel implements StoreContract
      */
     public function image_url()
     {
-        if (!$this->image)
+        if (!$this->images)
             return;
 
         return Storage::url($this->image);
@@ -64,6 +64,26 @@ class Store extends TranslatableModel implements StoreContract
     {
         return $this->image_url();
     }
+
+
+        /**
+     * Get the customer address that owns the customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function images()
+    {
+        return $this->hasMany(StoreImageProxy::modelClass(), 'store_id');
+    }
+
+
+    public function updateImage(){
+
+        $this->image = $this->images()->first()->path;
+        $this->save();
+
+    }
+
 
     //    public function getRouteKeyName()
     //    {

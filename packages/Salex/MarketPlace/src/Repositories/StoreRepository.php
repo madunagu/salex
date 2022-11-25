@@ -60,45 +60,10 @@ class StoreRepository extends Repository
 
         $store->update($data);
 
-        $store->save();
-
-        $this->uploadImages($data, $store);
-
         Event::dispatch('marketplace.store.update.after', $id);
 
         return $store;
     }
 
-    /**
-     * @param array $data
-     * @param mixed $store
-     * @return void
-     */
-    public function uploadImages($data, $store, $type = "image")
-    {
-        if (isset($data[$type])) {
-            $request = request();
 
-            foreach ($data[$type] as $imageId => $image) {
-                $file = $type . '.' . $imageId;
-                $dir = 'store/' . $store->id;
-
-                if ($request->hasFile($file)) {
-                    if ($store->{$type}) {
-                        \Illuminate\Support\Facades\Storage::delete($store->{$type});
-                    }
-
-                    $store->{$type} = $request->file($file)->store($dir);
-                    $store->save();
-                }
-            }
-        } else {
-            if ($store->{$type}) {
-                Storage::delete($store->{$type});
-            }
-
-            $store->{$type} = null;
-            $store->save();
-        }
-    }
 }

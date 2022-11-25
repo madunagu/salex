@@ -198,35 +198,11 @@ $productBaseImage = product_image()->getProductBaseImage($product, $images);
                                     @endif
 
                                     <div class="add-to-cart-btn pl0">
-                                        @if (
-                                        isset($form)
-                                        && ! $form
-                                        )
+
                                         <button type="submit" {{ ! $product->isSaleable() ? 'disabled' : '' }} class="theme-btn {{ $addToCartBtnClass ?? '' }}">
-
-
-
                                             {{ ($product->type == 'booking') ?  __('shop::app.products.book-now') :  __('shop::app.products.add-to-cart') }}
                                         </button>
-                                        @elseif(isset($addToCartForm) && ! $addToCartForm)
-                                        <form method="POST" action="{{ route('shop.cart.add', $product->id) }}">
 
-                                            @csrf
-
-                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                            <input type="hidden" name="quantity" value="1">
-                                            <button type="submit" {{ ! $product->isSaleable() ? 'disabled' : '' }} class="btn btn-add-to-cart {{ $addToCartBtnClass ?? '' }}">
-
-
-                                                <span class="fs14 fw6 text-up-4">
-                                                    {{ ($product->type == 'booking') ?  __('shop::app.products.book-now') : $btnText ?? __('shop::app.products.add-to-cart') }}
-                                                </span>
-                                            </button>
-                                        </form>
-                                        @else
-                                        <add-to-cart form="true" csrf-token='{{ csrf_token() }}' product-id="{{ $product->id }}" reload-page="{{ $reloadPage ?? false }}" move-to-cart="{{ $moveToCart ?? false }}" wishlist-move-route="{{ $wishlistMoveRoute ?? false }}" add-class-to-btn="{{ $addToCartBtnClass ?? '' }}" is-enable={{ ! $product->isSaleable() ? 'false' : 'true' }} show-cart-icon={{ empty($showCartIcon) }} btn-text="{{ (! isset($moveToCart) && $product->type == 'booking') ?  __('shop::app.products.book-now') : $btnText ?? __('shop::app.products.add-to-cart') }}">
-                                        </add-to-cart>
-                                        @endif
                                     </div>
                                 </div>
 
@@ -237,13 +213,14 @@ $productBaseImage = product_image()->getProductBaseImage($product, $images);
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <p class="">{{__('succinct::app.products.share-product')}}<p>
+                                    <p class="">{{__('succinct::app.products.share-product')}}
+                                    <p>
                                     <div class="social-icons">
-                                        <a href="https://www.facebook.com/share.php?u={{url()->current()}}" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 rango-facebook" title="facebook"></i> </a>
-                                        <a href="http://twitter.com/share?text={{$product->name}}&url={{url()->current()}}&hashtags=trendingProducts,SanSalvador" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 rango-twitter" title="twitter"></i> </a>
-                                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{url()->current()}}" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 rango-linked-in" title="linkedin"></i> </a>
-                                        <a href="http://pinterest.com/pin/create/link/?url={{url()->current()}}" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 rango-pintrest" title="Pinterest"></i> </a>
-                                        <a href="https://www.instagram.com/?url={{url()->current()}}" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 rango-instagram" title="instagram"></i></a>
+                                        <a href="https://www.facebook.com/share.php?u={{url()->current()}}" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs30 rango-facebook" title="facebook"></i> </a>
+                                        <a href="http://twitter.com/share?text={{$product->name}}&url={{url()->current()}}&hashtags=trendingProducts,SanSalvador" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs30 rango-twitter" title="twitter"></i> </a>
+                                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{url()->current()}}" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs30 rango-linked-in" title="linkedin"></i> </a>
+                                        <a href="http://pinterest.com/pin/create/link/?url={{url()->current()}}" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs30 rango-pintrest" title="Pinterest"></i> </a>
+                                        <a href="https://www.instagram.com/?url={{url()->current()}}" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs30 rango-instagram" title="instagram"></i></a>
                                     </div>
                                 </div>
                             </div>

@@ -10,6 +10,7 @@ use Salex\MarketPlace\Http\Controllers\Shop\RegistrationController;
 use Salex\MarketPlace\Http\Controllers\Shop\ResetPasswordController;
 use Salex\MarketPlace\Http\Controllers\Shop\SessionController;
 use Salex\MarketPlace\Http\Controllers\Shop\InventorySourceController;
+use Salex\Marketplace\Http\Controllers\Shop\ShopController;
 
 Route::group([
     'prefix'     => 'merchant',
@@ -173,7 +174,7 @@ Route::group([
 
 
 
-        /**
+    /**
      * Inventory sources routes.
      */
     Route::get('/inventory_sources', [InventorySourceController::class, 'index'])->defaults('_config', [
@@ -197,5 +198,17 @@ Route::group([
     ])->name('merchant.inventory_sources.update');
 
     Route::post('/inventory_sources/delete/{id}', [InventorySourceController::class, 'destroy'])->name('merchant.inventory_sources.delete');
+});
 
+
+
+
+Route::group([
+    'prefix'     => 'store',
+    'middleware' => ['web', 'theme', 'currency']
+], function () {
+
+    Route::get('/{url}', [StoreController::class, 'view'])->defaults('_config', [
+        'view' => 'succinct::shop.store.view',
+    ])->name('shop.store.view');
 });

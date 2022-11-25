@@ -110,6 +110,12 @@
                     border-radius: 52px;
                 }
             }
+            .social-icons {
+                a {
+                    color: #C5C5C5 !important;
+                }
+            }
+            
         }
 
         .options {
@@ -536,6 +542,8 @@
 }
 
 
+
+
 .seller-detail {
     text-align: left;
     margin-bottom: 46px;
@@ -557,9 +565,7 @@
         overflow: hidden;
         border-radius: 12px;
     }
-    .social-icons{
-        color: #C5C5C5;
-    }
+
 
     .reviews {
         vertical-align: top;

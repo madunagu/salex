@@ -27,16 +27,20 @@ class StoreImageRepository extends Repository
         $previousImageIds = $store->images()->pluck('id');
 
         if (isset($data['images'])) {
+            $savedImageIds = array_keys($data['images']);
+            $oldImages = array_diff($previousImageIds->toArray(), $savedImageIds);
+
             foreach ($data['images'] as $imageId => $image) {
                 $file = 'images.' . $imageId;
                 $dir = 'store/' . $store->id;
 
                 if (str_contains($imageId, 'image_')) {
                     if (request()->hasFile($file)) {
-                        $this->create([
+                        $lastImage = $this->create([
                             'path' => request()->file($file)->store($dir),
                             'store_id' => $store->id
                         ]);
+                        $store->image = $lastImage->path;
                     }
                 } else {
                     if (is_numeric($index = $previousImageIds->search($imageId))) {
@@ -54,14 +58,15 @@ class StoreImageRepository extends Repository
                     }
                 }
             }
-        }
+            foreach ($oldImages as $imageId) {
+                if ($imageModel = $this->find($imageId)) {
+                    Storage::delete($imageModel->path);
 
-        foreach ($previousImageIds as $imageId) {
-            if ($imageModel = $this->find($imageId)) {
-                Storage::delete($imageModel->path);
-
-                $this->delete($imageId);
+                    $this->delete($imageId);
+                }
             }
+
+            $store->updateImage();
         }
     }
 }

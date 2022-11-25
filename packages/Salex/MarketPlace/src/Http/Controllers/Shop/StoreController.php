@@ -11,6 +11,7 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Salex\MarketPlace\Repositories\MerchantRepository;
 use Illuminate\Support\Facades\Auth;
 use Salex\MarketPlace\Models\Merchant;
+use Salex\MarketPlace\Repositories\StoreImageRepository;
 
 class StoreController extends Controller
 {
@@ -31,10 +32,10 @@ class StoreController extends Controller
      */
     public function __construct(
         protected StoreRepository $storeRepository,
+        protected StoreImageRepository $storeImageRepository,
         protected MerchantRepository $merchantRepository
     ) {
         $this->_config = request('_config');
-  
     }
 
     /**
@@ -44,7 +45,7 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $store_id =Auth::guard('merchant')->user()->store_id;
+        $store_id = Auth::guard('merchant')->user()->store_id;
         $store = $this->storeRepository->find($store_id);
         return view($this->_config['view'])->with('store', $store);
     }
@@ -59,8 +60,8 @@ class StoreController extends Controller
     {
         // $categories = $this->category->all();
         $merchant = Auth::guard('merchant')->user();
-        $store_id =$merchant->store_id;
-     
+        $store_id = $merchant->store_id;
+
         $store = $this->storeRepository->find($store_id);
         if (!empty($store)) {
             return redirect()->route('merchant.store.update');
@@ -79,8 +80,8 @@ class StoreController extends Controller
     {
         // $categories = $this->category->all();
         $merchant = Auth::guard('merchant')->user();
-        $store_id =$merchant->store_id;
-     
+        $store_id = $merchant->store_id;
+
         $store = $this->storeRepository->find($store_id);
 
         $categories = [];
@@ -123,10 +124,10 @@ class StoreController extends Controller
         }
         if (!key_exists('is_visible', $data)) {
             $data['is_visible'] = 0;
-        }   
+        }
 
         $merchant =   Auth::guard('merchant')->user();
-     
+
         $data['owner_id'] = $merchant->id;
         $store_id = $merchant->store_id;
         $store = $this->storeRepository->find($store_id);
@@ -137,6 +138,8 @@ class StoreController extends Controller
         }
 
         $store = $this->storeRepository->create($data);
+        $lastImage = $this->storeImageRepository->uploadImages($data, $store);
+
 
         $merchant->store_id = $store->id;
         $merchant->save();
@@ -195,10 +198,24 @@ class StoreController extends Controller
 
         $store = $this->storeRepository->update($data, $store_id);
 
+        $lastImage = $this->storeImageRepository->uploadImages($data, $store);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Store']));
 
 
         return redirect()->route($this->_config['redirect']);
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function view($url)
+    {
+        $store = $this->storeRepository->where('url', $url)->firstOrFail();
+        $products = [];
+        return view($this->_config['view'])->with(['store' => $store, 'results' => $products]);
     }
 }

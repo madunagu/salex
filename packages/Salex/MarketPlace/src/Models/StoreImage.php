@@ -7,5 +7,5 @@ use Salex\MarketPlace\Contracts\StoreImage as StoreImageContract;
 
 class StoreImage extends Model implements StoreImageContract
 {
-    protected $fillable = [];
+    protected $fillable = ['path','store_id','type'];
 }
