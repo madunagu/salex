@@ -1,37 +1,26 @@
 <template>
-    <div
-        class="col-lg-3 col-md-12 popular-category-wrapper"
-        v-if="popularCategoryDetails"
-    >
-        <div class="card col-12 no-padding">
-            <div class="category-image">
-                <img
-                    :data-src="popularCategoryDetails.image_url"
-                    class="lazyload"
-                    alt=""
-                />
-            </div>
+    <div class="col-lg-2 col-md-12 popular-category-wrapper" v-if="popularCategoryDetails">
+        <a :href="`${slug}`" class="unset">
+            <div class="card col-12 no-padding">
+                <div class="category-image">
+                    <img :data-src="popularCategoryDetails.image_url" class="lazyload" alt="" />
+                </div>
 
-            <div class="card-description">
-                <h3 class="fs20">{{ popularCategoryDetails.name }}</h3>
+                <div class="card-description">
+                    <p class="fs20 remove-decoration normal-text text-center">{{ popularCategoryDetails.name }}</p>
 
-                <ul class="font-clr pl30">
-                    <li
-                        :key="index"
-                        v-for="(
+                    <ul class="font-clr pl30">
+                        <li :key="index" v-for="(
                             subCategory, index
-                        ) in popularCategoryDetails.children"
-                    >
-                        <a
-                            :href="`${slug}/${subCategory.slug}`"
-                            class="remove-decoration normal-text"
-                        >
-                            {{ subCategory.name }}
-                        </a>
-                    </li>
-                </ul>
+                        ) in popularCategoryDetails.children">
+                            <a :href="`${slug}/${subCategory.slug}`" class="remove-decoration normal-text">
+                                {{ subCategory.name }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        </a>
     </div>
 </template>
 

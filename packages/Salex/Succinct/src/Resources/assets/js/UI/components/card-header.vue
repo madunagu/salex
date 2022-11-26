@@ -6,7 +6,7 @@
         </div>
 
         <div class="col-12 no-padding" v-else >
-            <h2 class="fs20 fw6">{{ headerHeading }}</h2>
+            <h2 class="fs20 fw7">{{ headerHeading }}</h2>
         </div>
 
         <div class="col-8 no-padding">

@@ -181,6 +181,8 @@ return [
         'customer-reviews'   => 'Customer Reviews',
         'shipping-methods'   => 'Shipping Methods',
         'popular-categories' => 'Popular Categories',
+        'popular-product-categories' => 'Popular Product Categories',
+        'popular-service-categories' => 'Popular Service Categories',
     ],
 
     'header'        => [
