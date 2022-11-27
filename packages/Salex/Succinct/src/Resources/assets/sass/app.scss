@@ -599,6 +599,53 @@ header {
                 }
             }
         }
+
+
+        .phone-contact {
+            i {
+                margin-right: 5px;
+                vertical-align: middle;
+                color: #25D366;
+            }
+
+            span {
+                position: relative;
+                padding-left: 0;
+            }
+                .mini-phone-content {
+                    font-size: 16px;
+                    font-weight: 600;
+                    text-align: right;
+                    margin-right: 7px;
+                    letter-spacing: 0;
+                    position: relative;
+                    color: $font-color;
+                    display: inline-block;
+
+                    .phone-text {
+                        font-size: 10px;
+                        text-transform: uppercase;
+                        color: #C6C6C6;
+                        font-weight: 400;
+                    }
+
+                    i {
+                        +span.cart-text {
+                            padding-left: 0px;
+                            vertical-align: text-bottom;
+                        }
+                    }
+
+                    +.down-arrow-container {
+                        top: 0;
+
+                        .rango-arrow-down {
+                            top: 0;
+                        }
+                    }
+                
+            }
+        }
     }
 
     .dropdown-menu-large {

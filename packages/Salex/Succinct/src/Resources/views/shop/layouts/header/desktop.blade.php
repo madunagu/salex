@@ -12,20 +12,29 @@
 </div>
 
 <div class="content-list right">
-    <right-side-header :header-content="{{ json_encode(app('Webkul\Velocity\Repositories\ContentRepository')->getAllContents()) }}">
+    <div class="row">
+        <div class="col-lg-8">
 
-        {{-- this is default content if js is not loaded --}}
-        <ul type="none" class="no-margin">
-        </ul>
-        {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
+            <right-side-header :header-content="{{ json_encode(app('Webkul\Velocity\Repositories\ContentRepository')->getAllContents()) }}">
 
-        @include('succinct::shop.layouts.particals.wishlist', ['isText' => true])
+                {{-- this is default content if js is not loaded --}}
+                <ul type="none" class="no-margin">
+                </ul>
 
-        {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
+            </right-side-header>
+        </div>
+        <div class="col-lg-4">
+            <div class="left-wrapper customer-functions">
+                {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
 
-        {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
+                @include('succinct::shop.layouts.particals.wishlist', ['isText' => true])
 
-        @include('succinct::shop.layouts.particals.compare', ['isText' => true])
+                {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
 
-    </right-side-header>
+                {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
+
+                @include('succinct::shop.layouts.particals.compare', ['isText' => true])
+            </div>
+        </div>
+    </div>
 </div>
