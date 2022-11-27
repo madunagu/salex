@@ -3,6 +3,8 @@
 namespace Salex\Succinct\Providers;
 
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 // use Webkul\Velocity\Facades\Velocity as VelocityFacade;
@@ -27,6 +29,7 @@ class SuccinctServiceProvider extends ServiceProvider
         $this->loadPublishableAssets();
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'succinct');
+
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'succinct');
     }
