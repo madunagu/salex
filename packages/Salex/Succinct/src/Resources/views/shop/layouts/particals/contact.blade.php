@@ -1,5 +1,5 @@
 @php
-$phone = '(+503)7492-4277';
+$phone = core()->getConfigData('general.general.phone.phone');
 @endphp
 
 <div class="phone-contact btn btn-link" id="phone-contact">
