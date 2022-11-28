@@ -11,9 +11,9 @@ use Webkul\Core\Eloquent\TranslatableModel;
 class Store extends TranslatableModel implements StoreContract
 {
 
-    public $translatedAttributes = ['owner_id','name', 'address', 'description', 'return_policy', 'shipping_policy', 'meta_title', 'meta_description', 'meta_keywords'];
+    public $translatedAttributes = ['owner_id', 'name', 'address', 'description', 'return_policy', 'shipping_policy', 'meta_title', 'meta_description', 'meta_keywords'];
 
-    protected $fillable = ['url','tax_number', 'featured', 'state_id', 'is_physical', 'category_id', 'phone', 'geolocation', 'is_visible', 'facebook', 'twitter', 'instagram', 'telegram'];
+    protected $fillable = ['url', 'tax_number', 'featured', 'state_id', 'is_physical', 'category_id', 'phone', 'geolocation', 'is_visible', 'facebook', 'twitter', 'instagram', 'telegram'];
 
     protected $with = ['translations'];
 
@@ -66,7 +66,7 @@ class Store extends TranslatableModel implements StoreContract
     }
 
 
-        /**
+    /**
      * Get the customer address that owns the customer.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -77,12 +77,24 @@ class Store extends TranslatableModel implements StoreContract
     }
 
 
-    public function updateImage(){
+    public function updateImage()
+    {
 
         $this->image = $this->images()->first()->path;
         $this->save();
-
     }
+
+
+    /**
+     * Get the product reviews that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(StoreReviewProxy::modelClass());
+    }
+
 
 
     //    public function getRouteKeyName()

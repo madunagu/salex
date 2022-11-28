@@ -2,7 +2,7 @@
 
 namespace Salex\MarketPlace\Http\Controllers\Shop;
 
-use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Event;use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Salex\MarketPlace\DataGrids\ProductDataGrid;
@@ -146,14 +146,14 @@ class SaleController extends Controller
      * @return \Illuminate\View\View
      */
     public function update_product($id)
-    {       
+    {
         $this->merchant = auth()->guard('merchant')->user();
 
         $product = $this->productRepository->with(['variants', 'variants.inventories'])->findOrFail($id);
 
         $categories = $this->categoryRepository->getCategoryTree();
 
-        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1])->whereIn('vendor_id',[0,$this->merchant->store_id]);
+        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1])->whereIn('vendor_id', [0, $this->merchant->store_id]);
 
         return view($this->_config['view'], compact('product', 'categories', 'inventorySources'));
     }
@@ -193,36 +193,14 @@ class SaleController extends Controller
      */
     public function update(ProductForm $request, $id)
     {
-        $data = request()->all();
+        Event::dispatch('catalog.product.update.before', $id);
 
-        // $data['locale'] = 'en';
-        //TODO: remove this quick fix
+        $data = $request->all();
+        $data['locale'] = 'en';
 
-        $multiselectAttributeCodes = [];
+        $product = $this->productRepository->update($data, $id);
 
-        $productAttributes = $this->productRepository->findOrFail($id);
-
-        foreach ($productAttributes->attribute_family->attribute_groups as $attributeGroup) {
-            $customAttributes = $productAttributes->getEditableAttributes($attributeGroup);
-
-            if (count($customAttributes)) {
-                foreach ($customAttributes as $attribute) {
-                    if ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
-                        array_push($multiselectAttributeCodes, $attribute->code);
-                    }
-                }
-            }
-        }
-
-        if (count($multiselectAttributeCodes)) {
-            foreach ($multiselectAttributeCodes as $multiselectAttributeCode) {
-                if (!isset($data[$multiselectAttributeCode])) {
-                    $data[$multiselectAttributeCode] = [];
-                }
-            }
-        }
-
-        $this->productRepository->update($data, $id);
+        Event::dispatch('catalog.product.update.after', $product);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Product']));
 
@@ -342,7 +320,7 @@ class SaleController extends Controller
     }
 
 
-        /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\View\View
@@ -353,5 +331,4 @@ class SaleController extends Controller
 
         return view($this->_config['view'], compact('order'));
     }
-
 }

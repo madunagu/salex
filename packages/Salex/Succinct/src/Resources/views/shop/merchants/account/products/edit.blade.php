@@ -53,7 +53,7 @@ $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
 
 
     <div class="account-table-content">
-        @csrf
+        @csrf()
 
         <input name="_method" type="hidden" value="PUT">
 
@@ -70,7 +70,7 @@ $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
 
                     @foreach ($customAttributes as $attribute)
 
-                    <?php
+                    @php
                     if ($attribute->code == 'guest_checkout' && !core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
                         continue;
                     }
@@ -98,7 +98,7 @@ $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
                     array_push($validations, $attribute->validation);
 
                     $validations = implode('|', array_filter($validations));
-                    ?>
+                    @endphp
 
                     @if (view()->exists($typeView = 'admin::catalog.products.field-types.' . $attribute->type))
 
@@ -112,7 +112,7 @@ $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
                             <span class="currency-code">({{ core()->currencySymbol(core()->getBaseCurrencyCode()) }})</span>
                             @endif
 
-                            <?php
+                            @php
                             $channel_locale = [];
 
                             if ($attribute->value_per_channel) {
@@ -122,7 +122,7 @@ $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
                             if ($attribute->value_per_locale) {
                                 array_push($channel_locale, $locale);
                             }
-                            ?>
+                            @endphp
 
                             @if (count($channel_locale))
                             <span class="locale">[{{ implode(' - ', $channel_locale) }}]</span>

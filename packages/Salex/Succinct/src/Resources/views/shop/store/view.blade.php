@@ -101,6 +101,10 @@ $bannerURL = $banner['url'];
         grid-gap: 15px;
     }
 
+    .gallery__item {
+        margin: 0 !important;
+    }
+
     .gallery__item--1 {
         grid-column-start: 1;
         grid-column-end: 2;
@@ -193,14 +197,14 @@ $bannerURL = $banner['url'];
             </div>
         </div>
 
-        <store-component></store-component>
+
         <div class="mt-4">
             <tabs>
                 <tab name="{{__('succinct::app.products.details')}}" :selected="true">
-       hi
+                    <store-component></store-component>
                 </tab>
                 <tab name="{{__('succinct::app.products.reviews-title')}}" :selected="false">
-                    hello
+      
                 </tab>
             </tabs>
         </div>
