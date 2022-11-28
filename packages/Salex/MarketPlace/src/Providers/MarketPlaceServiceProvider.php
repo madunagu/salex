@@ -5,6 +5,7 @@ namespace Salex\MarketPlace\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Routing\Router;
+use Salex\MarketPlace\Http\Middleware\RedirectIfNoStore;
 use Salex\MarketPlace\Http\Middleware\RedirectIfNotMerchant;
 use Webkul\Core\Tree;
 
@@ -18,6 +19,7 @@ class MarketPlaceServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         $router->aliasMiddleware('merchant', RedirectIfNotMerchant::class);
+        $router->aliasMiddleware('has-store', RedirectIfNoStore::class);
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 

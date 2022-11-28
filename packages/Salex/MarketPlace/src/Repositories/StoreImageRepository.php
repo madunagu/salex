@@ -40,7 +40,7 @@ class StoreImageRepository extends Repository
                             'path' => request()->file($file)->store($dir),
                             'store_id' => $store->id
                         ]);
-                        $store->image = $lastImage->path;
+                        // $store->image = $lastImage->path;
                     }
                 } else {
                     if (is_numeric($index = $previousImageIds->search($imageId))) {
@@ -66,7 +66,7 @@ class StoreImageRepository extends Repository
                 }
             }
 
-            $store->updateImage();
+            // $store->updateImage();
         }
     }
 }

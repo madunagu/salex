@@ -30,6 +30,9 @@ array_push($productImages, $image['medium_image_url']);
 }
 
 $productBaseImage = product_image()->getProductBaseImage($product, $images);
+
+$store = app('Salex\MarketPlace\Repositories\StoreRepository')->find(1);
+
 @endphp
 
 <meta name="twitter:card" content="summary_large_image" />
@@ -229,7 +232,7 @@ $productBaseImage = product_image()->getProductBaseImage($product, $images);
                     <div class="row">
                         <div class="col-lg-12 detail-pane">
                             <tabs>
-                                <tab name="Description" :selected="true">
+                                <tab name="{{__('succinct::app.products.details')}}" :selected="true">
                                     @include ('shop::products.view.short-description')
 
                                     @include ('shop::products.view.attributes', ['active' => true])
@@ -238,7 +241,7 @@ $productBaseImage = product_image()->getProductBaseImage($product, $images);
                                     @include ('shop::products.view.description')
                                 </tab>
 
-                                <tab name="Reviews" :selected="false">
+                                <tab name="{{__('succinct::app.products.reviews-title')}}" :selected="false">
 
                                     {{-- reviews count --}}
                                     @include ('shop::products.view.reviews', ['accordian' => true])
@@ -252,33 +255,31 @@ $productBaseImage = product_image()->getProductBaseImage($product, $images);
             </product-view>
         </div>
     </section>
+
+    @if(!empty($store))
     <section class="col-lg-2">
         <div class="seller-detail">
-            <img src="" />
-            <label class="fs16 fw6">The Ordinary</label>
-            <div class="reviews col-lg-12">
+            <div class="mb-4">
+                <img src="{{$store->image_url}}" style="width: 52px;" alt="{{$store->name}}" />
+            </div>
+            <label class="fs16 fw6 mb-2">{{$store->name}}</label>
+            <div class="reviews mb-2">
+                <span class="fs16">{{ $total }}</span>
                 <star-ratings push-class="mr5" :ratings="{{ round($reviewHelper->getAverageRating($product)) }}"></star-ratings>
 
                 <div class="reviews fs13">
-                    <span>
-                        {{ __('succinct::app.products.rating-reviews', [
-                                                        'rating' => round($reviewHelper->getAverageRating($product)),
-                                                        'review' => $total])
-                                                    }}
-                    </span>
+
                 </div>
             </div>
-            <p class="fs13 fw3">If an item arrived damaged or you've
-                changed your mind, you can send it
-                back for a full refund.</p>
+            <p class="fs13 fw3">{{$store->description}}</p>
 
-            <button type="submit" class="btn btn-about-seller ">
+            <a href="{{route('shop.store.view',$store->url)}}" class="btn btn-about-seller ">
                 <span class="fs14 fw6">About Seller</span>
-            </button>
+            </a>
         </div>
         <div class="seller-detail">
             <label class="fs16 fw6">Located In</label>
-            <label class="location-label"><i class="material-icons text-down-3">shopping_cart</i>
+            <label class="location-label"><i class="material-icons text-down-3">maps</i>
                 <span class="fs14 fw7 text-up-4 location-text">San Salvador</span></label>
             <div class="location-image">
                 <google-maps></google-maps>
@@ -286,6 +287,7 @@ $productBaseImage = product_image()->getProductBaseImage($product, $images);
         </div>
 
     </section>
+    @endif
 </div>
 <div class="row">
     <div class="related-products">

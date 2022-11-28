@@ -21,6 +21,22 @@
 
             {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.before') !!}
 
+            <div class="row image-container {!! $errors->has('image.*') ? 'has-error' : '' !!}">
+                <label class="col-12">
+                    {{ __('admin::app.admin.system.logo') }}
+                </label>
+
+                <div class="col-12">
+                    <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="image" :multiple="false" :images='@json($store->image_url)'></image-wrapper>
+
+                    <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
+                        @foreach ($errors->get('image.*') as $key => $message)
+                        @php echo str_replace($key, 'Image', $message[0]); @endphp
+                        @endforeach
+                    </span>
+                </div>
+            </div>
+
             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                 <label for="name">{{ __('marketplace::app.sellers.store-name') }}</label>
 
@@ -107,9 +123,10 @@
 
 
 
-            <div class="row image-container {!! $errors->has('image.*') ? 'has-error' : '' !!}">
+
+            <div class="row image-container {!! $errors->has('images.*') ? 'has-error' : '' !!}">
                 <label class="col-12">
-                    {{ __('admin::app.catalog.categories.image') }}
+                    {{ __('velocity::app.admin.meta-data.images') }}
                 </label>
 
                 <div class="col-12">

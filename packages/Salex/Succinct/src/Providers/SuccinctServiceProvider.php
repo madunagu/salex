@@ -29,7 +29,11 @@ class SuccinctServiceProvider extends ServiceProvider
         $this->loadPublishableAssets();
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'succinct');
-
+       
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/system.php',
+            'core'
+        );
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'succinct');
     }

@@ -68,12 +68,12 @@ Route::group([
     Route::get('/resend/verification/{email}', [RegistrationController::class, 'resendVerificationEmail'])->name('merchant.resend.verification-email');
 });
 
-
 Route::group([
     'prefix'     => 'merchant/account',
     'middleware' => ['web', 'theme', 'locale', 'currency', 'merchant']
 ], function () {
-    /**
+
+   /**
      * Logout.
      */
     Route::delete('logout', [SessionController::class, 'destroy'])->defaults('_config', [
@@ -98,6 +98,24 @@ Route::group([
         'redirect' => 'merchant.profile.index',
     ])->name('merchant.profile.destroy');
 
+    Route::get('store/create', [StoreController::class, 'create'])->defaults('_config', [
+        'view' => 'elegant::merchants.account.store.create',
+    ])->name('merchant.store.create');
+
+    Route::post('store/create', [StoreController::class, 'store'])->defaults('_config', [
+        'redirect' => 'merchant.store.index',
+    ])->name('merchant.store.store');
+
+
+    
+});
+
+
+Route::group([
+    'prefix'     => 'merchant/account',
+    'middleware' => ['web', 'theme', 'locale', 'currency', 'merchant', 'has-store']
+], function () {
+ 
 
     Route::get('store/index', [StoreController::class, 'index'])->defaults('_config', [
         'view' => 'elegant::merchants.account.store.index',
@@ -107,15 +125,7 @@ Route::group([
         'view' => 'elegant::merchants.account.dashboard.index',
     ])->name('merchant.store.dashboard');
 
-    Route::get('store/create', [StoreController::class, 'create'])->defaults('_config', [
-        'view' => 'elegant::merchants.account.store.create',
-    ])->name('merchant.store.create');
-
-    Route::post('store/create', [StoreController::class, 'store'])->defaults('_config', [
-        'redirect' => 'merchant.store.index',
-    ])->name('merchant.store.store');
-
-    Route::get('store/update', [StoreController::class, 'update'])->defaults('_config', [
+     Route::get('store/update', [StoreController::class, 'update'])->defaults('_config', [
         'view' => 'elegant::merchants.account.store.edit',
     ])->name('merchant.store.update');
 

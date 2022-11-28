@@ -21,6 +21,7 @@ return [
                 'status' => 'Status',
                 'active' => 'Active',
                 'inactive' => 'Inactive',
+                'support-phone' => 'Support Phone Number'
             ],
             'category' => [
                 'all' => 'All',
@@ -303,7 +304,8 @@ return [
         'rating-reviews'    => ':rating Ratings |   :review Reviews',
         'share-product'     => 'Share This Product',
         'arrival-date'           => 'Arrives: :date',
-        'order-before'           => 'Receive your product directly to the door of your house. Place the order before :time'
+        'order-before'           => 'Receive your product directly to the door of your house. Place the order before :time',
+
 
     ],
 
