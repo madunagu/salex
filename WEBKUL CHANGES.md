@@ -71,3 +71,12 @@ Webkul\Customer\Http\Controllers\AddressController.php;
         Log::info('DATA: ',compact('data'));
 
 ```
+
+Webkul\Product\Repositories\ProductRepository;
+== Added vendor_id to search method from products get all search 
+```php
+
+            if (! empty($params['vendor_id'])) {
+                $qb->where('products.vendor_id', $params['vendor_id']);
+            }
+```

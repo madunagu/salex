@@ -244,6 +244,10 @@ class ProductRepository extends Repository
                 $qb->where('products.type', $params['type']);
             }
 
+            if (! empty($params['vendor_id'])) {
+                $qb->where('products.vendor_id', $params['vendor_id']);
+            }
+
             #Filter collection by price
             if (! empty($params['price'])) {
                 $priceRange = explode(',', $params['price']);

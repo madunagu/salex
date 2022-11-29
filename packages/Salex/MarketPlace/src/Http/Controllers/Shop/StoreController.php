@@ -2,6 +2,7 @@
 
 namespace Salex\MarketPlace\Http\Controllers\Shop;
 
+use Webkul\Velocity\Helpers\Helper;
 use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -12,6 +13,10 @@ use Salex\MarketPlace\Repositories\MerchantRepository;
 use Illuminate\Support\Facades\Auth;
 use Salex\MarketPlace\Models\Merchant;
 use Salex\MarketPlace\Repositories\StoreImageRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Facades\ProductImage;
+use Illuminate\Support\Facades\Storage;
+
 
 class StoreController extends Controller
 {
@@ -31,9 +36,11 @@ class StoreController extends Controller
      * @return void
      */
     public function __construct(
+        protected Helper $velocityHelper,
         protected StoreRepository $storeRepository,
         protected StoreImageRepository $storeImageRepository,
-        protected MerchantRepository $merchantRepository
+        protected MerchantRepository $merchantRepository,
+        protected ProductRepository $productRepository,
     ) {
         $this->_config = request('_config');
     }
@@ -215,7 +222,70 @@ class StoreController extends Controller
     public function view($url)
     {
         $store = $this->storeRepository->where('url', $url)->firstOrFail();
+        $storeImages = $store->images()->get();
+
         $products = [];
-        return view($this->_config['view'])->with(['store' => $store, 'results' => $products]);
+        $bannerURL = $prefixName = $suffixName = "";
+        $images = [];
+
+        foreach ($storeImages as $key => $storeImage) {
+            $images[] = [
+                'id' => $storeImage->id,
+                'url' => Storage::url($storeImage->path),
+            ];
+        }
+
+        if (count($images) > 0) {
+            $bannerURL = array_pop($images)['url'];
+        }
+
+        if (!empty($store->name)) {
+            $storeNameArray = explode(' ', $store->name);
+            if (count($storeNameArray) > 1) {
+                $prefixName = $storeNameArray[0];
+                $suffixName = implode(' ', array_slice($storeNameArray, 1));
+            } else {
+                $prefixName = '';
+                $suffixName = $store->name;
+            }
+        }
+
+        return view($this->_config['view'])->with(['store' => $store, 'results' => $products, 'images' => $images, 'bannerURL' => $bannerURL, 'prefixName' => $prefixName, 'suffixName' => $suffixName]);
+    }
+
+
+
+    /**
+     * This method will fetch products from category.
+     *
+     * @param  int  $categoryId
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getStoreProducts($storeId)
+    {
+        /* fetch category details */
+        $storeDetails = $this->storeRepository->find($storeId);
+
+        /* if category not found then return empty response */
+        if (!$storeDetails) {
+            return response()->json([
+                'products'       => [],
+                'paginationHTML' => '',
+            ]);
+        }
+        request()->merge(['vendor_id' => $storeDetails->id]);
+
+        /* fetching products */
+        $products = $this->productRepository->getAll();
+        $products->withPath($storeDetails->url);
+
+        /* sending response */
+        return response()->json([
+            'products'       => collect($products->items())->map(function ($product) {
+                return $this->velocityHelper->formatProduct($product);
+            }),
+            'paginationHTML' => $products->appends(request()->input())->links()->toHtml(),
+        ]);
     }
 }

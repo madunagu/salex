@@ -12,44 +12,6 @@
 <meta name="keywords" content="{{ $store->meta_keywords }}" />
 @stop
 
-@php
-$isProductsDisplayMode = in_array(
-$store->display_mode, [
-null,
-'products_only',
-'products_and_description'
-]
-);
-
-$isDescriptionDisplayMode = in_array(
-$store->display_mode, [
-null,
-'description_only',
-'products_and_description'
-]
-);
-
-
-$storeImages = $store->images()->get();
-$images = [];
-
-foreach($storeImages as $key=>$storeImage){
-$images[] = [
-'id' => $storeImage->id,
-'url' => Storage::url($storeImage->path),
-];
-}
-
-$banner = "";
-if($storeImages){
-$banner = array_pop($images);
-
-$bannerURL = $banner['url'];
-}
-
-
-
-@endphp
 
 @push('css')
 <style type="text/css">
@@ -146,20 +108,6 @@ $bannerURL = $banner['url'];
 <section class="row col-12 category-page-wrapper">
     <div class="store-banner" style="background-image: url({{$bannerURL}})">
         <div class="container">
-            @php
-            if(!empty($store->name)){
-            $storeNameArray = explode(' ',$store->name);
-            if(count($storeNameArray)>1){
-            $prefixName = $storeNameArray[0];
-            $suffixName = implode(' ',array_slice($storeNameArray,1));
-
-            } else{
-            $prefixName = '';
-            $suffixName = $store->name;
-            }
-            }
-
-            @endphp
 
             @if ($prefixName)
             <div class="mt-4 fs30 fw3 mb-1">{{ $prefixName }} </div>
@@ -179,13 +127,10 @@ $bannerURL = $banner['url'];
 
     <div class="container mt-4">
         <div class="row remove-padding-margin">
-
-
-
             <div class="col-12 no-padding">
                 <div class="hero-image">
-
                     <div class="gallery">
+
                         @foreach (array_slice($images,0,3) as $key => $image)
                         <figure class="gallery__item gallery__item--{{$key+1}}">
                             <img src="{{$image['url']}}" class="gallery__img" alt="Image 1">
@@ -198,13 +143,13 @@ $bannerURL = $banner['url'];
         </div>
 
 
-        <div class="mt-4">
+        <div class="mt-4 mb-4">
             <tabs>
                 <tab name="{{__('succinct::app.products.details')}}" :selected="true">
                     <store-component></store-component>
                 </tab>
                 <tab name="{{__('succinct::app.products.reviews-title')}}" :selected="false">
-      
+
                 </tab>
             </tabs>
         </div>
@@ -217,18 +162,15 @@ $bannerURL = $banner['url'];
 @push('scripts')
 
 <script type="text/x-template" id="store-template">
+    <section class="row col-12 velocity-divide-page category-page-wrapper">
 
-    <div class="filters-container">
+                    <div class="filters-container col-lg-12">
                         <template v-if="products.length >= 0">
                             @include ('shop::products.list.toolbar')
                         </template>
                     </div>
 
-                    <div
-                        class="category-block"
-                        @if ($store->display_mode == 'description_only')
-                            style="width: 100%"
-                        @endif>
+                    <div class="category-block col-lg-12">
 
                         <shimmer-component v-if="isLoading" shimmer-count="4"></shimmer-component>
 
@@ -252,11 +194,8 @@ $bannerURL = $banner['url'];
                                 </div>
                             @endif
 
-                            {!! view_render_event('bagisto.shop.store.index.pagination.before', ['store' => $store]) !!}
-
                             <div class="bottom-toolbar" v-html="paginationHTML"></div>
 
-                            {!! view_render_event('bagisto.shop.store.index.pagination.after', ['store' => $store]) !!}
                         </template>
 
                         <div class="product-list empty" v-else>
@@ -265,7 +204,9 @@ $bannerURL = $banner['url'];
                         </div>
                     </div>
 
+     
 
+        </section>
     </script>
 
 <script>
@@ -281,12 +222,12 @@ $bannerURL = $banner['url'];
         },
 
         created: function() {
-            this.getCategoryProducts();
+            this.getStoreProducts();
         },
 
         methods: {
-            'getCategoryProducts': function() {
-                this.$http.get(`${this.$root.baseUrl}/category-products/4${window.location.search}`)
+            'getStoreProducts': function() {
+                this.$http.get(`${this.$root.baseUrl}/store/products/{{$store->id}}${window.location.search}`)
                     .then(response => {
                         this.isLoading = false;
                         this.products = response.data.products;
