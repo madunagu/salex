@@ -3,7 +3,7 @@
 namespace Salex\MarketPlace\Http\Controllers\Shop;
 
 use Illuminate\Routing\Controller;
-use Salex\MarketPlace\Datagrids\InventorySourceDataGrid;
+use Salex\MarketPlace\DataGrids\InventorySourceDataGrid;
 use Webkul\Inventory\Http\Requests\InventorySourceRequest;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 
