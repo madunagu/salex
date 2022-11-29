@@ -1,6 +1,6 @@
 <?php
 
-namespace Salex\MarketPlace\Datagrids;
+namespace Salex\MarketPlace\DataGrids;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
