@@ -69,7 +69,7 @@ class Ipn
     protected function getOrder()
     {
         if (empty($this->order)) {
-            $this->order = $this->orderRepository->findOneByField(['cart_id' => $this->post['orderId']]);
+            $this->order = $this->orderRepository->findOneByField(['cart_id' => $this->post['data']['orderId']]);
         }
     }
 
@@ -80,7 +80,7 @@ class Ipn
      */
     protected function processOrder()
     {
-        if ($this->post['amountPaid'] != $this->order->grand_total  || $this->post['amountPaid'] != $this->order->order_currency_code) {
+        if ($this->post['data']['amountPaid'] != $this->order->grand_total  || $this->post['data']['amountPaid'] != $this->order->order_currency_code) {
             return;
         } else {
             $this->orderRepository->update(['status' => 'processing'], $this->order->id);
