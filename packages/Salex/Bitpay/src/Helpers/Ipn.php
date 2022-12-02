@@ -116,7 +116,7 @@ class Ipn
     {
         Log::info(print_r($this->post, true));
 
-        $invoiceId = $this->post['id'];
+        $invoiceId = $this->post['data']['id'];
 
         $bitpayClient = $this->bitpay->getClient();
 
