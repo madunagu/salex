@@ -80,7 +80,7 @@ class Ipn
      */
     protected function processOrder()
     {
-        if ($this->post['data']['amountPaid'] != $this->order->grand_total  || $this->post['data']['amountPaid'] != $this->order->order_currency_code) {
+        if ($this->post['data']['amountPaid'] != $this->order->grand_total  || $this->post['data']['currency'] != $this->order->order_currency_code) {
             return;
         } else {
             $this->orderRepository->update(['status' => 'processing'], $this->order->id);
