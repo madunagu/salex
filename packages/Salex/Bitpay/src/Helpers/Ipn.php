@@ -5,6 +5,7 @@ namespace Salex\Bitpay\Helpers;
 use Salex\Bitpay\Payment\Bitpay;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
+use Illuminate\Support\Facades\Log;
 
 class Ipn
 {
@@ -113,6 +114,8 @@ class Ipn
      */
     protected function postBack()
     {
+        Log::info(print_r($this->post, true));
+
         $invoiceId = $this->post['id'];
 
         $bitpayClient = $this->bitpay->getClient();

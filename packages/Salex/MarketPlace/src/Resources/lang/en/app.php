@@ -59,7 +59,8 @@ return [
         'delete-store' => 'Delete Store',
     ],
     'messages' => [
-        'already-exists' => 'A :name Already Exists'
+        'already-exists' => 'A :name Already Exists',
+        'create-inventory-source' => 'Please Create An Inventory Source First'
     ],
     'sales' => [
         'stores' => [

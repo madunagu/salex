@@ -20,6 +20,6 @@ Route::group(['middleware' => ['web']], function () {
     // });
 });
 
-Route::post('bitpay/ipn', [BitpayController::class, 'ipn'])
+Route::post('/bitpay/ipn', [BitpayController::class, 'ipn'])
     ->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class)
     ->name('bitpay.ipn');

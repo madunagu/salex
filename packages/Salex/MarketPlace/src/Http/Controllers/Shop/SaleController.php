@@ -2,7 +2,8 @@
 
 namespace Salex\MarketPlace\Http\Controllers\Shop;
 
-use Illuminate\Support\Facades\Event;use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Salex\MarketPlace\DataGrids\ProductDataGrid;
@@ -80,6 +81,16 @@ class SaleController extends Controller
      */
     public function create_product()
     {
+        $store_id = auth()->guard('merchant')->user()->store_id;
+
+        $inventorySourcesNumber = $this->inventorySourceRepository->where('vendor_id', $store_id)->count();
+
+        if ($inventorySourcesNumber < 1) {
+            session()->flash('error', trans('marketplace::app.messages.create-inventory-source'));
+
+            return redirect()->route('merchant.inventory_sources.create');
+        }
+
         $families = $this->attributeFamilyRepository->all();
 
         $configurableFamily = null;
@@ -147,13 +158,17 @@ class SaleController extends Controller
      */
     public function update_product($id)
     {
-        $this->merchant = auth()->guard('merchant')->user();
 
         $product = $this->productRepository->with(['variants', 'variants.inventories'])->findOrFail($id);
-
-        $categories = $this->categoryRepository->getCategoryTree();
+        $this->merchant = auth()->guard('merchant')->user();
 
         $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1])->whereIn('vendor_id', [0, $this->merchant->store_id]);
+        if ($inventorySources < 1) {
+            session()->flash('error', trans('marketplace::app.messages.create-inventory-source'));
+
+            return redirect()->route('merchant.inventory_sources.create');
+        }
+        $categories = $this->categoryRepository->getCategoryTree();
 
         return view($this->_config['view'], compact('product', 'categories', 'inventorySources'));
     }
