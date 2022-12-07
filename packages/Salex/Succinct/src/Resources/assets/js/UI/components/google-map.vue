@@ -1,16 +1,15 @@
 <template>
     <div>
         <div>
-            <gmap-autocomplete @place_changed="initMarker"></gmap-autocomplete>
+            <gmap-autocomplete @place_changed="onSelectLocation"></gmap-autocomplete>
 
         </div>
         <br>
-        <input name="lat" v-model="latitude" style="display:none" />
-        <input name="lng" v-model="longitude" style="display:none" />
-        <gmap-map @click="saveLocation" :zoom="14" :center="center"
+        <input name="lat" v-model="locationMarker.lat" type="hidden" />
+        <input name="lng" v-model="locationMarker.lng" type="hidden" />
+        <gmap-map @click="onMapClicked" :zoom="14" :center="center"
             style="width:100%;  height: 400px;overflow: hidden;border-radius: 12px;">
-            <gmap-marker :key="index" v-for="(m, index) in locationMarkers" :position="m.position"
-                @click="center = m.position"></gmap-marker>
+            <gmap-marker :position="locationMarker" @click="(center = locationMarker)"></gmap-marker>
         </gmap-map>
     </div>
 </template>
@@ -18,52 +17,50 @@
 <script>
 export default {
     name: "GoogleMap",
+    props: ['formerLocation'],
     data() {
         return {
-            center: {
-                lat: 39.7837304,
-                lng: -100.4458825
-            },
-            locationMarkers: [],
-            locPlaces: [],
-            existingPlace: null,
-            latitude: null,
-            longitude: null,
+            center: { lat: 13.6929, lng: -89.2182 },
+            locationMarker: { lat: 13.6929, lng: -89.2182 },
         };
     },
 
     mounted() {
         this.locateGeoLocation();
+        if (this.formerLocation) {
+            this.locationMarker = this.formerLocation;
+            // this.center = this.formerLocation;
+            console.log(this.locationMarker);
+        }
     },
 
     methods: {
-        saveLocation(e) {
-            console.log(JSON.stringify(e.latLng.toJSON(), null, 2));
+        onMapClicked(e) {
+            this.locationMarker = JSON.parse(JSON.stringify(e.latLng.toJSON(), null, 2));
+        },
 
-            this.locationMarkers = [];
-            const marker = JSON.parse(JSON.stringify(e.latLng.toJSON(), null, 2))
-            this.locationMarkers.push({ position: marker });
-            this.latitude = marker.lat;
-            this.longitude = marker.lng;
+        onSelectLocation(loc) {
+            this.addMarkerAndCenterMap(loc);
+            this.selectAddress(loc);
         },
-        initMarker(loc) {
-            this.existingPlace = loc;
-            this.addLocationMarker();
-        },
-        addLocationMarker() {
-            if (this.existingPlace) {
-                const marker = {
-                    lat: this.existingPlace.geometry.location.lat(),
-                    lng: this.existingPlace.geometry.location.lng()
-                };
-                this.locationMarkers.push({ position: marker });
-                this.locPlaces.push(this.existingPlace);
-                this.center = marker;
-                this.latitude = marker.lat;
-                this.longitude = marker.lng;
-                this.existingPlace = null;
+
+        selectAddress(loc) {
+            var address = {};
+            for (var i = 0; i < loc.address_components.length; i++) {
+                address[loc.address_components[i].types[0]] = loc.address_components[i].long_name;
             }
+            console.log(address);
+            this.$emit('onAddressSelected', address);
         },
+
+        addMarkerAndCenterMap(loc) {
+            this.locationMarker = {
+                lat: loc.geometry.location.lat(),
+                lng: loc.geometry.location.lng()
+            };
+            this.center = this.locationMarker;
+        },
+
         locateGeoLocation: function () {
             navigator.geolocation.getCurrentPosition(res => {
                 this.center = {

@@ -1,4 +1,3 @@
-@if ($cart)
 <script type="text/x-template" id="coupon-component-template">
     <div class="coupon-container">
             <div class="discount-control">
@@ -41,8 +40,8 @@
         data() {
             return {
                 center: {
-                    lat: 39.7837304,
-                    lng: -100.4458825
+                    lat: 13.6929,
+                    lng: 89.2182
                 },
                 locationMarkers: [],
                 locPlaces: [],
@@ -58,6 +57,7 @@
             initMarker(loc) {
                 this.existingPlace = loc;
                 this.addLocationMarker();
+                console.log(loc);
             },
             addLocationMarker() {
                 if (this.existingPlace) {
@@ -97,4 +97,3 @@
 
     });
 </script>
-@endif

@@ -6,6 +6,22 @@
 
 @section('content-wrapper')
     <checkout></checkout>
+    <div id="deleteProfileForm" class="d-none">
+
+        <modal id="deleteProfile" :is-open="modalIds.deleteProfile" class="large-modal-container">
+            <h3 slot="header">
+                {{ __('shop::app.customer.account.address.create.page-title') }}
+            </h3>
+
+            <i class="rango-close"></i>
+
+            <div slot="body">
+
+            @include('shop::customers.account.address.forms.create-address', ['shipping' => true])
+
+            </div>
+        </modal>
+    </div>
 @endsection
 
 @push('scripts')
@@ -17,7 +33,6 @@
         <div class="container">
             <div id="checkout" class="checkout-process row offset-lg-1 col-lg-11 col-md-12">
                 <h1 class="col-12">{{ __('velocity::app.checkout.checkout') }}</h1>
-
                 <div class="col-lg-7 col-md-12">
                     <div class="step-content information" id="address-section">
                         @include('shop::checkout.onepage.customer-info')
@@ -775,5 +790,16 @@
             });
 
         })();
+    </script>
+
+    <script>
+        /**
+         * Show delete profile modal.
+         */
+        function showAddressModal() {
+            document.getElementById('deleteProfileForm').classList.remove('d-none');
+
+            window.app.showModal('deleteProfile');
+        }
     </script>
 @endpush

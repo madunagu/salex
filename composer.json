@@ -17,6 +17,7 @@
         "barryvdh/laravel-debugbar": "^3.1",
         "barryvdh/laravel-dompdf": "^2.0.0",
         "bitpay/sdk-light": "^2.2",
+        "btcpayserver/btcpayserver-greenfield-php": "^2.0",
         "cviebrock/laravel-elasticsearch": "^9.0",
         "diglactic/laravel-breadcrumbs": "^7.0",
         "doctrine/dbal": "^2.9",

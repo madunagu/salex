@@ -107,10 +107,11 @@
 @section('content-wrapper')
 <section class="row col-12 category-page-wrapper">
     <div class="store-banner" style="background-image: url({{$bannerURL}})">
-        <div class="container">
+        <div class="container pt20">
+            <div class="col-lg-6">
 
             @if ($prefixName)
-            <div class="mt-4 fs30 fw3 mb-1">{{ $prefixName }} </div>
+            <div class="fs30 fw3 mb-1">{{ $prefixName }} </div>
             @endif
             @if($suffixName)
             <h2>{{ $suffixName }}</h2>
@@ -122,8 +123,8 @@
             </div>
             @endif
         </div>
+        </div>
     </div>
-    <div></div>
 
     <div class="container mt-4">
         <div class="row remove-padding-margin">

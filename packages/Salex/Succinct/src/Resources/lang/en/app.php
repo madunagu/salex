@@ -262,8 +262,10 @@ return [
             'remove-all-success' => 'All the items from your wishlist have been removed',
         ],
         'address' => [
-            'apartment' => 'House number, apartment, building',
+            'apartment' => 'House number, Apartment, Building',
+            'neighbourhood' => 'Neighborhood, Passage, Street',
             'description' => 'General indications or references',
+            'cancel' => 'Cancel',
         ],
         'sidebar' => [
             'hello' => 'Hello',

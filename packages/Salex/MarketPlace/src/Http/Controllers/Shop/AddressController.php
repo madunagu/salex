@@ -75,6 +75,10 @@ class AddressController extends Controller
         if ($this->customerAddressRepository->create($data)) {
             session()->flash('success', trans('shop::app.customer.account.address.create.success'));
 
+            if ($data['from_cart']) {
+                return redirect()->back();
+            }
+
             return redirect()->route($this->_config['redirect']);
         }
 
@@ -95,7 +99,7 @@ class AddressController extends Controller
             'customer_id' => $this->customer->id,
         ]);
 
-        if (! $address) {
+        if (!$address) {
             abort(404);
         }
 
@@ -167,7 +171,7 @@ class AddressController extends Controller
             'customer_id' => $this->customer->id,
         ]);
 
-        if (! $address) {
+        if (!$address) {
             abort(404);
         }
 

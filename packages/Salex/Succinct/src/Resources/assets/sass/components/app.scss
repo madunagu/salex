@@ -227,7 +227,25 @@
         .control-group .control {
             width: 100%;
         }
+
+        .page-action {
+            .opacity-50 {
+                opacity: .5;
+            }
+
+            .theme-btn {
+                padding: 10px 32px;
+                border-radius: 4px;
+            }
+        }
     }
+}
+
+.large-modal-container {
+    left: 10%;
+    width: 80%;
+    margin-left: 0 !important;
+    border-radius: 20px;
 }
 
 .product-card-new {
@@ -982,6 +1000,7 @@
         }
     }
 
+
     .account-layout {
         color: $font-color;
         padding: 15px 20px;
@@ -1465,9 +1484,17 @@
 
         .card {
             height: 100%;
+            border-radius: 12px;
+            border-color: #e5e5e5;
 
             h5 {
-                font-size: 14px;
+                font-size: 15px;
+            }
+
+            p.preview {
+                font-weight: 300;
+                font-size: 13px;
+                color: #504D4D;
             }
 
             .add-address-button {
@@ -1758,7 +1785,7 @@
     .sticky-header {
         top: 0px;
         height: 90px;
-        z-index: 100;
+        z-index: 10;
         position: sticky;
         background: white;
         padding: 0 6% 0 6%;
@@ -2393,7 +2420,7 @@
 }
 
 .vc-header {
-    z-index: 10;
+    z-index: 8;
     margin: 0 !important;
     padding: 0 6%;
     border: 1px solid #E5E5E5;
@@ -2646,6 +2673,60 @@
     .compare-products .col,
     .compare-products .col-2 {
         max-width: 25%;
+    }
+}
+
+.rounded-form {
+
+    input,
+    select,
+    textarea,
+    .control {
+        margin-top: 6px;
+        border: 1px solid #D8D8D8;
+        border-radius: 12px;
+        font-size: 13px;
+        padding: 12px 16px;
+        resize: none;
+        width: 100%;
+        background: $button-text-color;
+    }
+
+    .row {
+        margin-top: 24px;
+    }
+
+    label {
+        font-weight: 600;
+    }
+
+    #phone-container {
+        padding: 8px 16px;
+
+        select,
+        input {
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+
+        .phone-select-container {
+            background: #f5f5f5;
+            padding: 4px 8px;
+            width: 28%;
+            border-radius: 11px;
+
+            .phone-code-select {
+                width: 72%;
+                padding: 0;
+                background: none;
+            }
+        }
+
+        .phone-number {
+            width: 70%;
+            border-radius: 0;
+        }
     }
 }
 
