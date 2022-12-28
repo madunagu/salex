@@ -30,8 +30,8 @@
     @include('shop::checkout.cart.coupon')
 
     <script type="text/x-template" id="checkout-template">
-        <div class="container">
-            <div id="checkout" class="checkout-process row offset-lg-1 col-lg-11 col-md-12">
+        <div class="succinct-container">
+            <div id="checkout" class="checkout-process row col-lg-11 col-md-12">
                 <h1 class="col-12">{{ __('velocity::app.checkout.checkout') }}</h1>
                 <div class="col-lg-7 col-md-12">
                     <div class="step-content information" id="address-section">
@@ -80,7 +80,7 @@
                                 <div class="mb20">
                                     <button
                                         type="button"
-                                        class="theme-btn"
+                                        class="theme-btn px-5"
                                         @click="placeOrder()"
                                         :disabled="!isPlaceOrderEnabled"
                                         v-if="selected_payment_method.method != 'paypal_smart_button'"

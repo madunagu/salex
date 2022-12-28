@@ -112,18 +112,19 @@
 
                     @php
                     $addresses = old('address1') ?? explode(PHP_EOL, $address->address1);
+                    $addresses = array_pad($addresses,3,"");
                     @endphp
+
                     <div class="row">
 
-                        <div class="col-lg-6 control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">
+                        <div class="col-lg-6 control-group" :class="[errors.has('address1[0]') ? 'has-error' : '']">
                             <label for="address_0" class="mandatory">{{ __('shop::app.customer.account.address.create.street-address') }}</label>
 
-                            <input class="control" id="address_0" type="text" name="address1[]" value="{{ $addresses[0] ?: '' }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
+                            <input class="control" id="address_0" type="text" name="address1[0]" value="{{ $addresses[0] ?: '' }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
 
                             <span class="control-error" v-text="'{{ $errors->first('address1.*') }}'">
                             </span>
-                        </div>
-
+                        </div> 
                         <div class="col-lg-6 control-group" :class="[errors.has('address1[1]') ? 'has-error' : '']">
                             <label for="address_0" class="mandatory">{{ __('succinct::app.customer.address.apartment') }}</label>
 
@@ -134,7 +135,6 @@
                         </div>
 
                     </div>
-
                     <div class="row">
                         <div class="col-lg-12 control-group" :class="[errors.has('address1[2]') ? 'has-error' : '']">
                             <label for="address_0" class="mandatory">{{ __('succinct::app.customer.address.description') }}</label>

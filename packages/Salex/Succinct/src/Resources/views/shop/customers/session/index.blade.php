@@ -4,7 +4,9 @@
     {{ __('shop::app.customer.login-form.page-title') }}
 @endsection
 
-@section('content-wrapper')
+
+
+@section('body-header')
     <div class="auth-content form-container">
 
         {!! view_render_event('bagisto.shop.customers.login.before') !!}
@@ -136,6 +138,4 @@
 </script>
 
 @endpush
-
-
 

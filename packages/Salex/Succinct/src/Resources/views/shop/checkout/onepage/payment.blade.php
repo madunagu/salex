@@ -4,55 +4,37 @@
             <div class="form-header mb-30" slot="header">
 
                 <h3 class="fw6 display-inbl">
-                   {{ __('shop::app.checkout.onepage.payment-methods') }}
+                    {{ __('shop::app.checkout.onepage.payment-methods') }}
                 </h3>
 
                 <i class="rango-arrow"></i>
             </div>
 
-            <div class="payment-methods" slot="body">
+            <div class="payment-methods d-flex pb-4" slot="body">
+
                 @foreach ($paymentMethods as $payment)
 
-                    {!! view_render_event('bagisto.shop.checkout.payment-method.before', ['payment' => $payment]) !!}
+                {!! view_render_event('bagisto.shop.checkout.payment-method.before', ['payment' => $payment]) !!}
 
-                    <div class="row col-12">
-                        <div class="radio">
-                            <input
-                                type="radio"
-                                name="payment[method]"
-                                v-validate="'required'"
-                                v-model="payment.method"
-                                @change="methodSelected()"
-                                id="{{ $payment['method'] }}"
-                                value="{{ $payment['method'] }}"
-                                data-vv-as="&quot;{{ __('shop::app.checkout.onepage.payment-method') }}&quot;" />
-                            
-                            <label for="{{ $payment['method'] }}" class="radio-view"></label>
-                        </div>
+                <div class="payment-method mr10">
+                    @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($payment['method']); @endphp
 
-                        <div class="pl20">
-                            <div class="row">
-                                <span class="payment-method method-label">
-                                <b>{{ $payment['method_title'] }}</b>
-                                </span>
-                            </div>
-
-                            <div class="row">
-                            <span class="method-summary">{{ $payment['description'] }}</span>
-                            </div>
-
-                            @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($payment['method']); @endphp
-
-                            @if (! empty($additionalDetails))
-                                <div class="instructions" v-show="payment.method == '{{$payment['method']}}'">
-                                    <label>{{ $additionalDetails['title'] }}</label>
-                                    <p>{{ $additionalDetails['value'] }}</p>
-                                </div>
-                            @endif
-                        </div>
+                    @if (! empty($additionalDetails))
+                    <div class="instructions" v-show="payment.method == '{{$payment['method']}}'">
+                        <label>{{ $additionalDetails['title'] }}</label>
+                        <p>{{ $additionalDetails['value'] }}</p>
                     </div>
+                    @endif
 
-                    {!! view_render_event('bagisto.shop.checkout.payment-method.after', ['payment' => $payment]) !!}
+                    <input type="radio" class="d-none" name="payment[method]" v-validate="'required'" v-model="payment.method" @change="methodSelected()" id="{{ $payment['method'] }}" value="{{ $payment['method'] }}" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.payment-method') }}&quot;" />
+
+                    <label for="{{ $payment['method'] }}" class="payment-card">
+
+                        <img src="{{bagisto_asset('images/mastercard.svg')}}" class="payment-image" alt="{{ $payment['method_title'] }" />
+                    </label>
+                </div>
+
+                {!! view_render_event('bagisto.shop.checkout.payment-method.after', ['payment' => $payment]) !!}
 
                 @endforeach
 

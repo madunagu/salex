@@ -20,6 +20,12 @@ return [
                 'channel_based' => false,
                 'locale_based'  => true,
             ], [
+                'name'          => 'logo',
+                'title'         => 'admin::app.admin.system.logo',
+                'type'          => 'image',
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp,svg,svg+xml',
+                'channel_based' => true,
+            ], [
                 'name'          => 'active',
                 'title'         => 'admin::app.admin.system.status',
                 'type'          => 'boolean',

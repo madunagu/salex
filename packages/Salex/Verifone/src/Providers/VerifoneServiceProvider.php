@@ -1,11 +1,10 @@
 <?php
 
-namespace Salex\Bitpay\Providers;
+namespace Salex\Verifone\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Salex\Bitpay\Providers\EventServiceProvider;
 
-class BitpayServiceProvider extends ServiceProvider
+class VerifoneServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
@@ -14,13 +13,6 @@ class BitpayServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        include __DIR__ . '/../Http/routes.php';
-
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'bitpay');
-        
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'bitpay');
-
-        $this->app->register(EventServiceProvider::class);
     }
 
     /**
