@@ -30,7 +30,7 @@
 
                     <label for="{{ $payment['method'] }}" class="payment-card">
 
-                        <img src="{{bagisto_asset('images/mastercard.svg')}}" class="payment-image" alt="{{ $payment['method_title'] }" />
+                    <img src="{{bagisto_asset('images/payment-$paymentMethod.svg')}}" class="payment-image" alt="{{ $payment['method_title'] }}" title="{{$payment['method_title']}}" />
                     </label>
                 </div>
 

@@ -245,6 +245,8 @@ return [
             'registered-user'       => 'Registered User',
             'your-email-address'    => 'Your email address',
             'form-login-text'       => 'If you have an account, sign in with your email address.',
+            'form-signup-text'       => 'Don\'t have account?',
+            'form-delivery-text'       => 'Delivery to your address',
         ],
         'signup-form'       => [
             'login'             => 'Login',

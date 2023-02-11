@@ -534,7 +534,7 @@
             font-size: 16px;
             padding: 35px 55px;
             margin-bottom: 60px;
-            border: 1px solid $border-common;
+            // border: 1px solid $border-common;
 
             .form-header {
                 margin-bottom: 20px;
@@ -1596,6 +1596,7 @@
                 display: none;
             }
         }
+
         input:checked+.payment-card {
             opacity: 1;
             border-color: #0739A6;
@@ -2715,6 +2716,23 @@
 
     label {
         font-weight: 600;
+    }
+
+    .input-btn-group {
+        border: 1px solid $border-common;
+        border-radius: 12px;
+        padding: 0;
+
+        .control{
+            border: none;
+            display: inline-block;
+            width: 92%;
+            margin-top: 0;
+        }
+        .icon {
+            border: none;
+            background: white;
+        }
     }
 
     #phone-container {
