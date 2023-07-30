@@ -1,4 +1,4 @@
-@extends('shop::layouts.master')
+@extends('shop::layouts.focused')
 
 @section('page_title')
 {{ __('shop::app.customer.login-form.page-title') }}
@@ -15,6 +15,7 @@
         <div class="row">
             <div class="col-lg-3 col-md-4 container" style="background-color: #032CA6;">
                 <div class="body text-center">
+                    <a class="mb10">Back to Store</a>
                     <h2 class="fw7 text-white text-uppercase mb-4">Salex</h2>
                     <img src="{{bagisto_asset('images/delivery-guy.svg')}}" class="mx-auto d-block mt-5" style="width: 80%;" />
                     <div class="fs14 mt-4 text-white">{{ __('succinct::app.customer.login-form.form-delivery-text')}} </div>
@@ -50,12 +51,12 @@
                                     <button type="button" onclick="myFunction()" id="shoPassword" class="icon"><i class="rango-eye-hide"></i></button>
                                 </div>
 
-                                <input type="checkbox" class="show-password" />
+                                <input type="checkbox" class="show-password d-none" />
 
 
-                                {{ __('shop::app.customer.login-form.show-password') }}
+                                <!-- {{ __('shop::app.customer.login-form.show-password') }} -->
 
-                                <a href="{{ route('shop.customer.forgot_password.create') }}" class=" show-password float-right">
+                                <a href="{{ route('shop.customer.forgot_password.create') }}" class="show-password fs14 float-right">
                                     {{ __('shop::app.customer.login-form.forgot_pass') }}
                                 </a>
 
@@ -68,6 +69,7 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="mt10"></div>
 
 
                             {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}

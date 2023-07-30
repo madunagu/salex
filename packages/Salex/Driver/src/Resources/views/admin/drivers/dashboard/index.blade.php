@@ -327,7 +327,7 @@
                                 <li>
                                     <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
                                         <div class="image">
-                                            <?php $productBaseImage = productimage()->getProductBaseImage($item->product); ?>
+                                            <?php $productBaseImage = product_image()->getProductBaseImage($item->product); ?>
 
                                             <img class="item-image" src="{{ $productBaseImage['small_image_url'] }}" />
                                         </div>

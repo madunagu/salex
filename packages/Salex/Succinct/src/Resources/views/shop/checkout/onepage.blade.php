@@ -149,6 +149,7 @@
                         new_shipping_address: false,
                         selected_payment_method: '',
                         selected_shipping_method: '',
+                        order_shipping_methods: '',
                         countries: [],
                         countryStates: [],
 

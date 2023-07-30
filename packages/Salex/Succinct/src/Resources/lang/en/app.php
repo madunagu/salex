@@ -223,6 +223,8 @@ return [
         'subtotal'  => 'Subtotal',
         'sub-total' => 'Sub Total',
         'proceed'   => 'Proceed to checkout',
+        'delivery'  => 'Delivery',
+        'pickup'    => 'Pickup',
     ],
 
     'customer'      => [

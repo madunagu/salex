@@ -513,6 +513,7 @@
         width: 65%;
         margin: 0 auto;
         padding-top: 30px;
+        min-height: 100vh;
 
         .heading {
             width: 100%;
@@ -714,6 +715,34 @@
 
     .modal-footer {
         padding-right: 15px;
+    }
+}
+
+#shipping-section {
+    .tabs {
+        ul {
+            display: flex;
+            // justify-content: center;
+
+            li {
+                list-style: none;
+                padding: 15px 52px;
+                border-radius: 12px;
+                display: inline-block;
+                border: 1px solid transparent;
+                cursor: pointer;
+
+                &.active {
+                    border: 1px solid #0739A6;
+                }
+
+                a {
+                    font-size: 13px;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                }
+            }
+        }
     }
 }
 
@@ -1387,7 +1416,7 @@
     i {
         color: $black-color;
         width: 40px;
-        border: 0.5px solid #dedede;
+        // border: 0.5px solid #dedede;
         border-radius: 50px;
         height: 40px;
         text-align: center;
@@ -1471,6 +1500,33 @@
             margin-left: 5px;
         }
     }
+}
+
+.review-items {
+    .shipping-choice {
+        border-radius: 12px;
+
+        .card-body {
+            padding: 8px 0px 8px 8px;
+
+            .checkbox input:checked+.radio-view,
+            .radio input:checked+.radio-view {
+                background-position: 14px -14px;
+            }
+
+            .checkbox label.radio-view,
+            .radio label.radio-view {
+                background-image: url(../images/controls.svg);
+                background-position: -42px 0;
+                background-size: 28px;
+                width: 14px;
+                height: 14px;
+            }
+        }
+
+
+    }
+
 }
 
 .address-container {
@@ -1790,7 +1846,7 @@
 }
 
 #app {
-    min-height: 65vh;
+    min-height: 100vh;
     position: relative;
 }
 
@@ -2723,12 +2779,13 @@
         border-radius: 12px;
         padding: 0;
 
-        .control{
+        .control {
             border: none;
             display: inline-block;
             width: 92%;
             margin-top: 0;
         }
+
         .icon {
             border: none;
             background: white;
