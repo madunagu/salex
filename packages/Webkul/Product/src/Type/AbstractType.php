@@ -933,6 +933,7 @@ abstract class AbstractType
                 'total_weight'      => ($this->product->weight ?? 0) * $data['quantity'],
                 'base_total_weight' => ($this->product->weight ?? 0) * $data['quantity'],
                 'type'              => $this->product->type,
+                'vendor_id'         => $this->product->vendor_id,
                 'additional'        => $this->getAdditionalOptions($data),
             ],
         ];

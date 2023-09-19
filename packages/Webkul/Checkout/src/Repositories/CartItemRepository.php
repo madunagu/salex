@@ -25,4 +25,13 @@ class CartItemRepository extends Repository
     {
         return $this->model->find($cartItemId)->product->id;
     }
+
+    /**
+     * @param  int  $cartItemId
+     * @return int
+     */
+    public function getVendorId($cartItemId)
+    {
+        return $this->model->find($cartItemId)->vendor->id;
+    }
 }

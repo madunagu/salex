@@ -5,6 +5,7 @@ namespace Webkul\Checkout\Models;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Product\Models\ProductProxy;
+use Salex\MarketPlace\Models\StoreProxy;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -34,6 +35,13 @@ class CartItem extends Model implements CartItemContract
         return $this->hasOne(ProductProxy::modelClass(), 'id', 'product_id');
     }
 
+
+    public function vendor(): HasOne
+    {
+        return $this->hasOne(StoreProxy::modelClass(), 'id', 'vendor_id');
+    }
+
+    
     public function cart(): HasOne
     {
         return $this->hasOne(CartProxy::modelClass(), 'id', 'cart_id');

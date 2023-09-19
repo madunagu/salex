@@ -37,6 +37,14 @@ and then to publish the files to the UI
 
   ```
 
+  add dummy data with faker
+
+  ``` terminal
+
+    php artisan bagisto:fake
+
+  ```
+
 I recommend the proper css styles and targets should be experimented within chrome and then the .scss files should worked on to avoid running these scripts to much as it may take some seconds to complete.
 
 All changes for the theme cohesion should be made within the scss and resource files of the theme, making changes in other folder will affect other files and may have unexpected consequences.

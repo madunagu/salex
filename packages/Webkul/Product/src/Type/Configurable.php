@@ -119,7 +119,7 @@ class Configurable extends AbstractType
      */
     public function updateDefaultVariantId()
     {
-        if (! $defaultVariantId = request()->get('default_variant_id')) {
+        if (!$defaultVariantId = request()->get('default_variant_id')) {
             return;
         }
 
@@ -138,7 +138,7 @@ class Configurable extends AbstractType
     {
         $product = $this->productRepository->getModel()->create($data);
 
-        if (! isset($data['super_attributes'])) {
+        if (!isset($data['super_attributes'])) {
             return $product;
         }
 
@@ -220,7 +220,7 @@ class Configurable extends AbstractType
      */
     public function createVariant($product, $permutation, $data = [])
     {
-        if (! count($data)) {
+        if (!count($data)) {
             $data = [
                 'sku'         => $product->sku . '-variant-' . implode('-', $permutation),
                 'name'        => '',
@@ -239,7 +239,7 @@ class Configurable extends AbstractType
 
         if (
             isset($productInstance->variantsType)
-            && ! in_array($productInstance->variantsType, ['bundle', 'configurable', 'grouped'])
+            && !in_array($productInstance->variantsType, ['bundle', 'configurable', 'grouped'])
         ) {
             $typeOfVariants = $productInstance->variantsType;
         }
@@ -254,7 +254,7 @@ class Configurable extends AbstractType
         $attributeValues = [];
 
         foreach ($this->fillableTypes as $attributeCode) {
-            if (! isset($data[$attributeCode])) {
+            if (!isset($data[$attributeCode])) {
                 continue;
             }
 
@@ -353,7 +353,7 @@ class Configurable extends AbstractType
         $variant->update(['sku' => $data['sku']]);
 
         foreach ($this->fillableTypes as $attributeCode) {
-            if (! isset($data[$attributeCode])) {
+            if (!isset($data[$attributeCode])) {
                 continue;
             }
 
@@ -385,7 +385,7 @@ class Configurable extends AbstractType
                 }
             }
 
-            if (! $productAttributeValue) {
+            if (!$productAttributeValue) {
                 $this->attributeValueRepository->create([
                     'product_id'            => $variant->id,
                     'attribute_id'          => $attribute->id,
@@ -425,7 +425,7 @@ class Configurable extends AbstractType
         foreach ($this->product->super_attributes as $superAttribute) {
             $product->super_attributes()->save($superAttribute);
         }
-        
+
         foreach ($this->product->variants as $variant) {
             $newVariant = $variant->getTypeInstance()->copy();
 
@@ -528,7 +528,7 @@ class Configurable extends AbstractType
         if ($this->haveDiscount()) {
             return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
                 . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-                . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>'.'<span class="regular-price"></span>';
+                . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>' . '<span class="regular-price"></span>';
         } else {
             return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
                 . ' '
@@ -545,7 +545,7 @@ class Configurable extends AbstractType
     public function prepareForCart($data)
     {
         $data['quantity'] = parent::handleQuantity((int) $data['quantity']);
-        
+
         if (empty($data['selected_configurable_option'])) {
             if ($this->getDefaultVariantId()) {
                 $data['selected_configurable_option'] = $this->getDefaultVariantId();
@@ -558,7 +558,7 @@ class Configurable extends AbstractType
 
         $childProduct = $this->productRepository->find($data['selected_configurable_option']);
 
-        if (! $childProduct->haveSufficientQuantity($data['quantity'])) {
+        if (!$childProduct->haveSufficientQuantity($data['quantity'])) {
             return trans('shop::app.checkout.cart.quantity.inventory_warning');
         }
 
@@ -578,6 +578,7 @@ class Configurable extends AbstractType
                 'weight'            => $childProduct->weight,
                 'total_weight'      => $childProduct->weight * $data['quantity'],
                 'base_total_weight' => $childProduct->weight * $data['quantity'],
+                'vendor_id'         => $this->product->vendor_id,
                 'additional'        => $this->getAdditionalOptions($data),
             ], [
                 'parent_id'  => $this->product->id,
@@ -613,11 +614,11 @@ class Configurable extends AbstractType
             return $options1['selected_configurable_option'] === $options2['selected_configurable_option'];
         }
 
-        if (! isset($options1['selected_configurable_option'])) {
+        if (!isset($options1['selected_configurable_option'])) {
             return false;
         }
 
-        if (! isset($options2['selected_configurable_option'])) {
+        if (!isset($options2['selected_configurable_option'])) {
             return false;
         }
     }

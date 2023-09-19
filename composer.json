@@ -168,7 +168,10 @@
     "config": {
         "preferred-install": "stable",
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

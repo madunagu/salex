@@ -80,3 +80,43 @@ Webkul\Product\Repositories\ProductRepository;
                 $qb->where('products.vendor_id', $params['vendor_id']);
             }
 ```
+
+
+Webkul\Checkout\Database\CreateCartItemsTable;
+== Added vendor_id to cart_item database 
+```php
+            $table->integer('vendor_id')->unsigned();
+            $table->foreign('vendor_id')->references('id')->on('stores')->onDelete('cascade');
+```
+
+
+Webkul\Checkout\Repositories\CartItemRepository;
+== Added getVendorID to CartItemRepository  
+```php
+    /**
+     * @param  int  $cartItemId
+     * @return int
+     */
+    public function getVendorId($cartItemId)
+    {
+        return $this->model->find($cartItemId)->vendor->id;
+    }
+```
+
+Webkul\Checkout\src\Models\CartItem;
+==37 added vendor method to Cartitem model
+```php
+
+    public function vendor(): HasOne
+    {
+        return $this->hasOne(StoreProxy::modelClass(), 'id', 'vendor_id');
+    }
+```
+
+Webkul\Products\src\Type\Configurable;
+==581  added vendor id to products type 581
+
+```
+      'vendor_id'              => $this->product->vendor_id,
+        
+```
