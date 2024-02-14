@@ -1647,6 +1647,9 @@
             border: 1px solid #e5e5e5;
             border-radius: 20px;
             opacity: .5;
+            .payment-image {
+                width: 60px;
+            }
 
             input[type='radio'] {
                 display: none;

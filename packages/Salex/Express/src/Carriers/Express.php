@@ -5,6 +5,8 @@ namespace Salex\Express\Carriers;
 use Config;
 use Webkul\Shipping\Carriers\AbstractShipping;
 use Webkul\Checkout\Models\CartShippingRate;
+use Webkul\Checkout\Facades\Cart;
+
 use Webkul\Shipping\Facades\Shipping;
 
 class Express extends AbstractShipping
@@ -23,20 +25,36 @@ class Express extends AbstractShipping
      */
     public function calculate()
     {
-        if (! $this->isAvailable()) {
+        if (!$this->isAvailable()) {
             return false;
         }
+        $cart = Cart::getCart();
 
-        $object = new CartShippingRate;
+        $cartShippingRate = new CartShippingRate;
+        // Same Day shipping
+        // Next day shipping
+        // Free shipping
 
-        $object->carrier = 'express';
-        $object->carrier_title = $this->getConfigData('title');
-        $object->method = 'express_express';
-        $object->method_title = $this->getConfigData('title');
-        $object->method_description = $this->getConfigData('description');
-        $object->price =    100;
-        $object->base_price = 20;
+        $cartShippingRate->carrier = 'express';
+        $cartShippingRate->carrier_title = $this->getConfigData('title');
+        $cartShippingRate->method = 'express_express';
+        $cartShippingRate->method_title = $this->getConfigData('title');
+        $cartShippingRate->method_description = $this->getConfigData('description');
+        $cartShippingRate->price =    100;
+        $cartShippingRate->base_price = 23;
 
-        return $object;
+        if ($this->getConfigData('type') == 'per_unit') {
+            foreach ($cart->items as $item) {
+                if ($item->product->getTypeInstance()->isStockable()) {
+                    $cartShippingRate->price += core()->convertPrice($this->getConfigData('default_rate')) * $item->quantity;
+                    $cartShippingRate->base_price += $this->getConfigData('default_rate') * $item->quantity;
+                }
+            }
+        } else {
+            $cartShippingRate->price = core()->convertPrice($this->getConfigData('default_rate'));
+            $cartShippingRate->base_price = $this->getConfigData('default_rate');
+        }
+
+        return $cartShippingRate;
     }
 }

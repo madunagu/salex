@@ -1,4 +1,4 @@
-@extends('shop::layouts.master')
+@extends('shop::layouts.merchants')
 
 @section('content-wrapper')
     <div class="account-content row no-margin velocity-divide-page">

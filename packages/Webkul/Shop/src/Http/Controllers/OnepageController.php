@@ -11,6 +11,9 @@ use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Controllers\Controller;
 
+// use Barryvdh\Debugbar\Facade as DebugBar;
+use \Barryvdh\Debugbar\Facades\Debugbar as DebugBar;
+
 class OnepageController extends Controller
 {
     /**
@@ -97,6 +100,10 @@ class OnepageController extends Controller
     public function summary()
     {
         $cart = Cart::getCart();
+
+        // \Log::info(print_r($var, true));
+
+        DebugBar::addMessage($cart);
 
         return response()->json([
             'html' => view('shop::checkout.total.summary', compact('cart'))->render(),

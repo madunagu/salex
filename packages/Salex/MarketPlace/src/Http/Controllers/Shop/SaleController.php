@@ -83,9 +83,10 @@ class SaleController extends Controller
     {
         $store_id = auth()->guard('merchant')->user()->store_id;
 
-        $inventorySourcesNumber = $this->inventorySourceRepository->where('vendor_id', $store_id)->count();
 
-        if ($inventorySourcesNumber < 1) {
+        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1,'vendor_id'=> $store_id]);
+
+        if ($inventorySources->isEmpty()) {
             session()->flash('error', trans('marketplace::app.messages.create-inventory-source'));
 
             return redirect()->route('merchant.inventory_sources.create');
